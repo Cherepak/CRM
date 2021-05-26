@@ -1,0 +1,261 @@
+ul {
+    list-style: none;
+    padding: inherit;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    background-color: #fff;
+    margin: 0px;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dispaly-block {
+  display: block;
+}
+
+.padding {
+    padding: 10px 5px;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: polygon(0px 0px, 0px 0px, 0px 0px);
+  clip-path: polygon(0px 0px, 0px 0px, 0px 0px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+a:hover,
+a:focus {
+  color: #edc951;
+  cursor: pointer;
+  transition: all 400ms;
+}
+
+.text-blue {
+  color: #5182ed;
+}
+.font24 {
+  font-size: 24px;
+}
+
+.center {
+    text-align: center;
+}
+
+.padding-mega {
+    padding: 30px 5px;
+}
+
+.image__present-CRM {
+  width: 715px;
+}
+
+.item-margin:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.link__price:hover,
+.link__price:focus {
+  color: #fff;
+}
+
+.white-text {
+  color: #fff;
+}
+
+button {
+    background:none;
+    border: none;
+    outline: none;
+    padding: 8px 10px;
+    border-radius: 10px;
+}
+
+button:hover,
+button:focus {
+    cursor: pointer;
+    background-color: #edc951;
+    color: #fff;
+    transition:  all 400ms;
+}
+
+address {
+  font-style: normal;
+}
+
+.reletive {
+  position: relative;
+}
+
+.fixed {
+  display: block;
+  position: absolute;
+  width: 400px;
+  top: 200px;
+  z-index: 1;
+}
+
+
+.reletive__wrapper {
+  position: relative;
+}
+
+.login {
+    color: #edc951;
+}
+
+.logo {
+    width: 200px;
+}
+
+.presentPage__one-wrapper {
+    position: sticky;
+    box-shadow: 0 0 15px #e0e0e0;
+}
+
+.presentPage__one-wrapper__item:not(:last-child) {
+    margin-right: 10px;
+}
+
+.PresentPageScope__title {
+    padding: 10px 5px;
+    color: #fff;
+    background-color: #5182ed;
+    box-shadow: 10px 11px 0px #edc951;
+    width: 400px;
+    margin: 0 auto;
+}
+
+
+.PresentPageScope__title-text {
+    font-size: 32px;
+    font-weight: 700;
+}
+.PresentPageScope__twoSection__wrapper {
+  padding: 50px;
+  background-image: url("../image/1.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.PresentPageScope-twoSection__title {
+  padding: 15px 0;
+  background-color: #5182ed;
+  color: #fff;
+}
+
+.CRM__title3 {
+  font-size: 30px;
+}
+
+.CRM__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.image__iconCRM {
+  width: 50px;
+  margin-right: 20px;
+}
+
+.price-wrapper {
+  box-shadow: 0 0 7px #000;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.form {
+  margin: 0 auto;
+  width: 500px;
+}
+
+.form__item {
+  width: 500px;
+}
+
+.form__item:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.input {
+  padding: 10px 10px;
+  outline: none;
+  background-color: #dfdddd;
+  border: none;
+  width: 500px;
+  border-radius: 10px;
+}
+
+.submit {
+  display: block;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  background-color: #edc951;
+  padding: 10px 15px;
+  outline: none;
+  width: 520px;
+}
+
+.submit:hover,
+.submit:focus {
+  background-color: #5182ed;
+  cursor: pointer;
+  transition: all 400ms;
+}
+
+
+.form__reg {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.form__login {
+  width: 500px;
+  margin: 0 auto;
+}
+
+
+.footer {
+  background-color: #5182ed;
+  color: #fff;
+}
+
+
+.footer__link {
+  color: #fff;
+}
+
+.footer__item:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+
