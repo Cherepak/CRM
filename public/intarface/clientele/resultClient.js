@@ -1,20 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import ListClientele from "./listClientelt";
-import MyListClientele from "./myListClientele";
-import AddClientele from "./addClientele";
+
+import {AddClientele} from "./addClientele";
+
+import {ResultMyClientCorp} from "./ResultMyClientCorp"
+import {ResultMyClientFiz} from "./ResultMyClientFiz"
 
 export function ResultClient (props) {
 
-  const {listClientele, myListClientele,addClientele} = props.props.props.props.props.state;
+  const {ClicentMyFiz, ClicentMyCorp,addClientele} = props.props.props.props.props.state;
 
+  if(ClicentMyCorp) {
+    return <div>
+      <ResultMyClientCorp props={props}/>
+    </div>;
 
-  if(listClientele) {
-    return <ListClientele props={props}/>;
-
-  } else if (myListClientele) {
-    return <MyListClientele props={props}/>
+  } else if (ClicentMyFiz) {
+    return <div>
+      <ResultMyClientFiz props={props}/>
+    </div>
 
   } else if(addClientele) {
     return <AddClientele props={props}/>

@@ -1,33 +1,41 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
+import {ButtonClientAll} from "./clientele/ButtonClientAll";
+import {ButtonClicentMy} from "./clientele/ButtonClicentMy";
+import {ResultClient} from "./clientele/resultClient"
 export function Clientele(props) {
 
-  const componentListClientele = props.props.props.props.componentListClientele;
+  const componentListClienteleOuer = props.props.props.props.componentListClienteleOuer;
   const componentMyClientele = props.props.props.props.componentMyClientele;
+  const componentAddClientele = props.props.props.props.componentAddClientele;
+  
 
-  return <div>
-    <ul>
+
+
+  return <div className="flex">
+    <ul className="positionFixed">
     <li>
       <button onClick={()=> {
-        componentListClientele();
+        componentListClienteleOuer();
       }}>Список клиентов</button>
+      <ButtonClientAll props={props}/>
     </li>
 
     <li>
       <button onClick={()=> {
         componentMyClientele();
       }}>Мои клиенты</button>
+      <ButtonClicentMy props={props}/>
     </li>
 
     <li>
       <button onClick={()=> {
         componentAddClientele();
-      }}>Мои клиенты</button>
+      }}>Добавить клиента</button>
     </li>
   </ul>
 
-  <div>
+  <div className="resultClient">
     <ResultClient props={props}/>
   </div>
   </div>

@@ -4,52 +4,6 @@ app.use(express.static("public"));
 
 let mysql = require("mysql2");
 
-
-app.get("/sing-up", function(req, res) { // Форма входа на платформу
-
-
-  let connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    database: "listcompani",
-    password: "SoupMacTavish95"
-  })
-
-  connection.query(
-    "SELECT * FROM listcompani",
-    (err, results) => {
-      for (let i = 0; i < results.length; i++) {
-        if( results[i]["name"].toUpperCase() ==  req.query.login.toUpperCase()) {
-
-          let connect = mysql.createConnection({
-            host: "localhost",
-            port: 3306,
-            user: "root",
-            database: req.query.login,
-            password: "SoupMacTavish95"
-          });
-
-          connect.query(`SELECT * FROM listlogin`,
-          (err, results) => {
-            for(let i = 0; i < results.length; i++) {
-              if(results[i]["login"] == req.query.loginUser && results[i]["password"]==req.query.password) {
-                res.send({
-                  user:JSON.stringify(results[i]["Фио"]),
-                  userStatus:JSON.stringify(results[i]["status"]),
-                  status: true,
-                  firma:req.query.login
-              });
-              }
-            }
-          })
-        }
-      }
-    }
-  )
-});
-
-
 app.get(`/reg`,(req,res) => { // Форма регистрации
   let reglogincompani = req.query.reglogincompani;
   let firstUserName = req.query.firstUserName;
@@ -69,17 +23,17 @@ app.get(`/reg`,(req,res) => { // Форма регистрации
     password: "SoupMacTavish95"
   });
 
-  connectionListCompani.query(`INSERT INTO listcompani (name) VALUES ("${reglogincompani}")`); //правильно
+  connectionListCompani.query(`INSERT INTO listcompani (name) VALUES ("${reglogincompani}")`); //Добавили в базе данных в пунке name имя компании
 
-  const connectionDataBase = mysql.createConnection ({ // правильно
+  const connectionDataBase = mysql.createConnection ({ 
     host: "localhost",
     port: 3306,
     user: "root",
     password: "SoupMacTavish95"
   });
 
-  connectionDataBase.query(`CREATE DATABASE ${reglogincompani}`,()=>{
-    const connectionTableOnDataBase = mysql.createConnection({// правильно
+  connectionDataBase.query(`CREATE DATABASE ${reglogincompani}`,()=>{//создали базу данных для компании которая зарегестрировалась
+    const connectionTableOnDataBase = mysql.createConnection({
       host: "localhost",
       port: 3306,
       user: "root",
@@ -87,7 +41,7 @@ app.get(`/reg`,(req,res) => { // Форма регистрации
       password: "SoupMacTavish95"
     });
 
-
+   //Устанавливаем в базу данных табицу с сотрудиками 
     connectionTableOnDataBase.query(`CREATE TABLE listlogin (
       id INT NOT NULL AUTO_INCREMENT,
       login TEXT(100) NULL,
@@ -101,7 +55,7 @@ app.get(`/reg`,(req,res) => { // Форма регистрации
       почта TEXT(100) NULL,
       отдел TEXT(100) NULL,
       PRIMARY KEY (id))`);
-
+   //Добавляем первого пользователя, он же администратор в кабинете фирмы
     connectionTableOnDataBase.query(`
     INSERT INTO listlogin
     (login,password,status,фамилия,отчество,имя,датарождения,телефон,почта,отдел )
@@ -115,11 +69,104 @@ app.get(`/reg`,(req,res) => { // Форма регистрации
     "${telEmployee}",
     "${mailEmployee}",
     "${section}")`);
+
+
+    connectionTableOnDataBase.query(`CREATE TABLE clientele (
+      id int NOT NULL AUTO_INCREMENT,
+      менеджер text,
+      фамилия text,
+      имя text,
+      отчество text,
+      почтаклиента varchar(45) DEFAULT NULL,
+      телефонклиента varchar(45) DEFAULT NULL,
+      лицо text,
+      инн varchar(45) DEFAULT NULL,
+      огрн varchar(45) DEFAULT NULL,
+      банк text,
+      кпп varchar(45) DEFAULT NULL,
+      окпо varchar(45) DEFAULT NULL,
+      расчетныйсчет varchar(45) DEFAULT NULL,
+      название text,
+      PRIMARY KEY (id)
+    )`);
+  
+    connectionTableOnDataBase.query(`CREATE TABLE task (
+      id int NOT NULL AUTO_INCREMENT,
+      тема text,
+      откого text,
+      кому text,
+      датаначала varchar(45) DEFAULT NULL,
+      датаокончания varchar(45) DEFAULT NULL,
+      статус varchar(45) DEFAULT NULL,
+      задача varchar(45) DEFAULT NULL,
+      PRIMARY KEY (id))`
+    
+    )
   });
 
-  res.send(JSON.stringify({statusReg:true}))
+  
+
+  res.send({statusReg:true})
 
 })
+
+
+app.get("/sing-up", function(req, res) { // Форма входа на платформу
+
+  let connection = mysql.createConnection({
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    database: "listcompani",
+    password: "SoupMacTavish95"
+  })
+
+  connection.query(
+    "SELECT * FROM listcompani",
+    (err, results) => {
+      for (let i = 0; i < results.length; i++) {
+        if( results[i]["name"].toUpperCase() ==  req.query.login.toUpperCase()) {//Находим существование фирмы
+
+          let connect = mysql.createConnection({//подключаемся к БД фирмы
+            host: "localhost",
+            port: 3306,
+            user: "root",
+            database: req.query.login,
+            password: "SoupMacTavish95"
+          });
+
+          connect.query(`SELECT * FROM listlogin`,
+          (err, results) => {
+
+            for(let i = 0; i < results.length; i++) { //ищем пользователей и перебираем их
+              if(results[i]["login"] == req.query.loginUser && results[i]["password"]==req.query.password) {//проверяем совпадаем логин пользователя с паролем
+                
+                res.send({
+                  user:JSON.stringify(results[i]["фамилия"] + " " +results[i]["имя"] + " " +results[i]["отчество"]),
+                  userStatus:JSON.stringify(results[i]["status"]),
+                  status: true,
+                  firma:req.query.login
+              });
+
+              } else {
+                res.send({
+                  status:false,
+                  massage: "Такого пользователя не найдено"
+                })
+              }
+            }
+          })
+        } else {
+          res.send({
+            massage: "Такой компании не существует"
+          })
+        }
+      }
+    }
+  )
+});
+
+
 
 app.get(`/listEmployee`, (req,res) => { //Список сотрудников в фирме
   const firma = req.query.firma;
@@ -128,7 +175,6 @@ app.get(`/listEmployee`, (req,res) => { //Список сотрудников в
     port: 3306,
     user: "root",
     database: firma,
-
     password: "SoupMacTavish95"
   })
 
@@ -371,5 +417,105 @@ app.get(`/taskFromMy`, (req,res) => {
     }
   });
 });
+
+
+app.get("/addclient", (req,res) => { //список клиентов физ лица
+  const family = req.query.family;
+  const name  = req.query.name;
+  const sourname  = req.query.sourname;
+  const mail  = req.query.mail;
+  const phone  = req.query.phone;
+  const face  = req.query.face;
+  const inn  = req.query.inn;
+  const ogrn  = req.query.ogrn;
+  const bank  = req.query.bank;
+  const kpp  = req.query.kpp;
+  const okpo  = req.query.okpo;
+  const raschSch  = req.query.raschSch;
+  const user  = req.query.user;
+  const database = req.query.database;
+  const namecorp = req.query.namecorp;
+
+  const connect = mysql.createConnection({
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    database: database,
+    password: "SoupMacTavish95"
+  })
+
+  connect.query(`INSERT INTO clientele (менеджер, фамилия, имя, отчество, почтаклиента, телефонклиента, лицо, инн, огрн, банк, кпп, окпо, расчетныйсчет, название) VALUES ("${user}","${family}","${name}","${sourname}","${mail}","${phone}","${face}","${inn}", "${ogrn}", "${bank}","${kpp}","${okpo}","${raschSch}","${namecorp}")`, (err, results) => {
+    res.send({status:true})
+  })
+}) 
+
+
+app.get("/downloadmyclientfiz", (req,res) => {
+  const user  = req.query.user;
+  const database = req.query.database;
+
+  const connect = mysql.createConnection({
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    database: database,
+    password: "SoupMacTavish95"
+  })
+
+  connect.query(`SELECT * FROM clientele WHERE менеджер = '${user}' AND лицо = 'физическое'`, (err, results)=> {
+    
+    if(err == null && results.length !==0) {
+      let data = {};
+
+      for(let i = 0; i < results.length; i++) {
+        data[results[i]["id"]] = results[i]
+      }
+  
+      res.send({data:data, status:true})
+    } else if (results.length == 0) {
+      res.send({status:false})
+
+    } else {
+      res.send({status: false})
+    }
+
+    
+  })
+})
+
+app.get("/downloadmyclientcorp", (req,res) => {
+  const user  = req.query.user;
+  const database = req.query.database;
+
+  const connect = mysql.createConnection({
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    database: database,
+    password: "SoupMacTavish95"
+  })
+
+  connect.query(`SELECT * FROM clientele WHERE менеджер = '${user}' AND лицо = 'юридическое'`, (err, results)=> {
+    console.log(results.length)
+    if(err == null && results.length !==0) {
+
+      let data = {};
+
+      for(let i = 0; i < results.length; i++) {
+        data[results[i]["id"]] = results[i]
+      }
+  
+      res.send({data:data, status:true})
+    } else if (results.length == 0) {
+      res.send({status:false})
+
+    } else {
+      res.send({status: false})
+    }
+
+    
+  })
+
+})
 
 app.listen(3000);

@@ -9,45 +9,53 @@ class App extends React.Component {
     constructor(props){
         super(props);
         this.state={
-          scope:true,
-          compani:false,
-          login:false,
-          reg:false,
-          userName:"Черепаха Дмитрий Вадимович",
-          userStatus: "",
-          statusReg: false,
+          //___________________________состояние для презентационых страниц
+          scope:true,//
+          compani:false,// страница о компании
+          login:false,// страница входа
+          reg:false,//страница с регистрацией
+          userName:"Черепаха Дмитрий Вадимович",//имя пользователя, должно подгружаться из сервера
+          userStatus: "",//статус пользователя (user/admin) для возможностей
+          statusReg: false,// статус регистрации
+          sport:true,//
+          sale: false,//
+          skald:false,//
+//_______________________________________
+          status: true,//статус пользователя (зарегестрирован или нет)
+//_____________________________состояния для главных страниц пользовательского интерфейса
+          tableWork:false,//страница рабочий стол
+          employee:false,//страница с пользователями
+          task:false,//страница с задачами
+          sklad:false,//Страница со складом
+          clientele: true,//страница с клиентами
+          massage:false,//страница с сообщениями 
+          setting: false,//Страница с настройками
+//_______________________________
+          firma:'горн', // имя компании для сервера(временная фирма)
+//_________________________________
+          listUser: '',//хранилище со списком пользователей
+//_____________________________состояние для интерфейса сотрудников
+          addEmployee: true,// страница добавить пользователя
+          listEmployeeState: false,//
+          propfileEmployee:false,//
+//________________________________состояние для интерфейса задач
+          myTask: false,//
+          addTask:false,//
+          taskForMy:false,//
+//______________________________состояние для интерфейса с клиентами
+          ButtonClientAll:false,
+            ClientOuerFiz:false,
+            ClientOuerCorp:false,
 
-          status: true,
+          buttonClicentMy:false,
+            ClicentMyFiz: false,
+            ClicentMyCorp: false,
 
-          tableWork:false,
-          employee:false,
-          task:false,
-          sklad:false,
-          clientele: true,
-          massage:false,
-          setting: false,
-
-          firma:'горн', //временная фирма
-
-          listUser: '',
-
-          addEmployee: true,
-          listEmployeeState: false,
-          propfileEmployee:false,
-
-          myTask: false,
-          addTask:false,
-          taskForMy:false,
-
-          listClientele:false,
-          myListClientele:false,
-          addClientele,
-
-          data:"",
-
-          sport:true,
-          sale: false,
-          skald:false,
+          addClientele: false,
+//____________________________________
+          data:"",//сюда загружаются данные с сервера для их обработки на клиенте
+//____________________________Состояние 
+          
         }
 
         this.componentSportPage = this.componentSportPage.bind(this);
@@ -77,9 +85,12 @@ class App extends React.Component {
         this.componentTaskFromMy = this.componentTaskFromMy.bind(this);
         this.componentAddTaskToServer = this.componentAddTaskToServer.bind(this);
         this.componentReg = this.componentReg.bind(this);
-        this.componentListClientele = this.componentListClientele.bind(this);
+        this.componentListClienteleOuer = this.componentListClienteleOuer.bind(this);
         this.componentMyClientele = this.componentMyClientele.bind(this);
         this.componentAddClientele = this.componentAddClientele.bind(this);
+        this.componentAddClientToServer = this.componentAddClientToServer.bind(this);
+        this.componentDownloadMyClientcorp = this.componentDownloadMyClientcorp.bind(this);
+        this.componentDownloadMyClientfiz = this.componentDownloadMyClientfiz.bind(this);
     }
     render() {
         return (
@@ -112,9 +123,12 @@ class App extends React.Component {
                 componentAddTask = {this.componentAddTask}
                 componentTaskFromMy = {this.componentTaskFromMy}
                 componentAddTaskToServer = {this.componentAddTaskToServer}
-                componentListClientele = {this.componentListClientele}
+                componentListClienteleOuer = {this.componentListClienteleOuer}
                 componentMyClientele = {this.componentMyClientele}
                 componentAddClientele = {this.componentAddClientele}
+                componentAddClientToServer = {this.componentAddClientToServer}
+                componentDownloadMyClientfiz = {this.componentDownloadMyClientfiz}
+                componentDownloadMyClientcorp = {this.componentDownloadMyClientcorp}
                 noSubmit = {this.noSubmit}
                 />
             </div>
@@ -125,42 +139,80 @@ class App extends React.Component {
       event.preventDefault();
     }
 
-    componentListClientele() { //загрузить всех клиентов
-      fetch(`/listclientele`)
+    componentAddClientToServer(family,name,sourname,mail,phone,face,inn,ogrn,bank,kpp,okpo,raschSch,namecorp) {
+      fetch(`/addclient?family=${family}&name=${name}&sourname=${sourname}&mail=${mail}&phone=${phone}&face=${face}&inn=${inn}&ogrn=${ogrn}&bank=${bank}&kpp=${kpp}&okpo=${okpo}&raschSch=${raschSch}&user=${this.state.userName}&database=${this.state.firma}namecorp=${namecorp}`)
+      .then((result) => {
+        return result.json()
+      })
+      .then((data) => {
+        if(data["status"] == true) {
+          alert("Данные добавлены")
+        }
+      })
+    }
+
+    
+    componentDownloadMyClientfiz() {
+      fetch(`/downloadmyclientfiz?user=${this.state.userName}&database=${this.state.firma}`)
       .then((result) => {
         return result.json();
       })
       .then((data) => {
-        this.setState(state=> ({
-          listClientele: true,
-          myListClientele: false,
-          data: data["data"]
-        }))
+        if(data["status"] == true) {
+          this.setState(state=> ({
+            data: data["data"],
+            ClicentMyFiz: true,
+            ClicentMyCorp: false,
+          }))
+        } else {alert("Данных не найдено")}
       })
+    }
+
+    componentDownloadMyClientcorp() {
+      fetch(`/downloadmyclientcorp?user=${this.state.userName}&database=${this.state.firma}`)
+      .then((result) => {
+        return result.json();
+      })
+      .then((data) => {
+        if(data["status"] == true) {
+          this.setState(state=> ({
+            data: data["data"],
+            ClicentMyFiz: false,
+            ClicentMyCorp: true,
+          }))
+        } else {
+          alert("Данные не найдены")
+        }
+      })
+    }
+
+    componentDownloadAllClientfiz() {
+
+    }
+
+    componentDownloadAllClientcorp() {
+      
+    }
+
+    componentListClienteleOuer() { //загрузить всех клиентов
+      this.setState(state=> ({
+        ButtonClientAll:true,
+        buttonClicentMy:false,
+        addClientele: false,
+      }))
     }
 
     componentMyClientele() {//загрузить клиентов пользователя
-      fetch(`/mylistclientele`)
-      .then((result)=> {
-        return result.json();
-      })
-      .then((data)=> {
-        this.setState(state=> ({
-          listClientele: false,
-          myListClientele: true,
-          data: data["data"]
-        }))
-      })
+      this.setState(state => ({
+        ButtonClientAll:false,
+        buttonClicentMy:true,
+        addClientele: false,
+      }))
     }
-
     componentAddClientele() {//Добавить клиента
-      fetch(`/addclientele`)
-      .then((result) => {
-        return result.json();
-      })
-      .then((data) => {
-
-      })
+      this.setState(state => ({
+        addClientele: true,
+      }))
     }
 
     componentAddTaskToServer(today,subject,task,todate,to) { // добавить задачу на сервер

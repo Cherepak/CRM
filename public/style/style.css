@@ -258,4 +258,22 @@ address {
   margin-bottom: 10px;
 }
 
+.resultClient {
+  margin-left: 300px;
+}
 
+.positionFixed {
+  position: fixed;
+  top: 135px;
+  width: 200px;
+}
+
+.reletive {
+  position: relative;
+}
+
+.marginRight:not(:last-child) {
+  border-right: 1px solid #00000065;
+  padding-right: 10px;
+  margin-right: 10px;
+}

@@ -71,7 +71,7 @@ export function IntarfaceForWork (props) {
       </div>
     </header>
 
-    <main>
+    <main className="reletive">
       <Intarface props={props}/>
     </main>
   </div>
