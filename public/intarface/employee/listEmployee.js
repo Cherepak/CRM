@@ -9,7 +9,7 @@ export function ListEmployee(props) {
     for(let key in data) {
 
       result.push(
-        <li key={key} className="listEmployeeState__container">
+        <li key={key} className="listEmployeeState__container" key={key}>
         <ul >
           <li>
             <p>{data[key]["фамилия"]}</p>

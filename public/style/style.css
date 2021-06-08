@@ -272,8 +272,7 @@ address {
   position: relative;
 }
 
-.marginRight:not(:last-child) {
-  border-right: 1px solid #00000065;
-  padding-right: 10px;
-  margin-right: 10px;
+.clientCard {
+  padding: 5px 10px;
+  box-shadow: 0 0 8px #000;
 }

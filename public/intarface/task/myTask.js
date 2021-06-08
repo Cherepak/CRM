@@ -10,7 +10,7 @@ export function MyTask (props) { // задачи пользователя
     console.log(data);
     for(let key in data) {
       result.push(
-          <li>
+          <li key={key}>
             <span>Кому: {data[key]["кому"]}</span>
             <span>Тема: {data[key]["тема"]}</span>
             <span>Дата начала: {data[key]["датаначала"]}</span>

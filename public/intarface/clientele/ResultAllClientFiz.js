@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-export function ResultMyClientFiz(props) {
+export function ResultAllClientFiz (props) {
     const {data} = props.props.props.props.props.props.state;
-    const componentDownoladClientCard = props.props.props.props.props.props.componentDownoladClientCard;
     let result = [];
+    const componentDownoladClientCard = props.props.props.props.props.props.componentDownoladClientCard;
 
     for(let key in data) {
         result.push(

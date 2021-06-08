@@ -44,14 +44,16 @@ class App extends React.Component {
           taskForMy:false,//
 //______________________________состояние для интерфейса с клиентами
           ButtonClientAll:false,
-            ClientOuerFiz:false,
-            ClientOuerCorp:false,
+            ClientAllFiz: false, 
+            ClientAllCorp: false,
 
           buttonClicentMy:false,
             ClicentMyFiz: false,
             ClicentMyCorp: false,
 
           addClientele: false,
+
+          openClientCard:false,
 //____________________________________
           data:"",//сюда загружаются данные с сервера для их обработки на клиенте
 //____________________________Состояние 
@@ -91,6 +93,10 @@ class App extends React.Component {
         this.componentAddClientToServer = this.componentAddClientToServer.bind(this);
         this.componentDownloadMyClientcorp = this.componentDownloadMyClientcorp.bind(this);
         this.componentDownloadMyClientfiz = this.componentDownloadMyClientfiz.bind(this);
+        this.componentDownloadAllClientfiz = this.componentDownloadAllClientfiz.bind(this);
+        this.componentDownloadAllClientcorp = this.componentDownloadAllClientcorp.bind(this);
+        this.componentDownoladClientCard = this.componentDownoladClientCard.bind(this);
+        this.componentAddCorrectClient = this.componentAddCorrectClient.bind(this);
     }
     render() {
         return (
@@ -129,18 +135,59 @@ class App extends React.Component {
                 componentAddClientToServer = {this.componentAddClientToServer}
                 componentDownloadMyClientfiz = {this.componentDownloadMyClientfiz}
                 componentDownloadMyClientcorp = {this.componentDownloadMyClientcorp}
+                componentDownloadAllClientfiz = {this.componentDownloadAllClientfiz}
+                componentDownloadAllClientcorp = {this.componentDownloadAllClientcorp}
+                componentDownoladClientCard = {this.componentDownoladClientCard}
+                componentAddCorrectClient = {this.componentAddCorrectClient}
                 noSubmit = {this.noSubmit}
                 />
             </div>
         )
     }
 
+
+
     noSubmit(event) {
       event.preventDefault();
     }
 
-    componentAddClientToServer(family,name,sourname,mail,phone,face,inn,ogrn,bank,kpp,okpo,raschSch,namecorp) {
-      fetch(`/addclient?family=${family}&name=${name}&sourname=${sourname}&mail=${mail}&phone=${phone}&face=${face}&inn=${inn}&ogrn=${ogrn}&bank=${bank}&kpp=${kpp}&okpo=${okpo}&raschSch=${raschSch}&user=${this.state.userName}&database=${this.state.firma}namecorp=${namecorp}`)
+    componentAddCorrectClient(id,menedger,namecorp,family,name,sourname,mail,phone,face,inn,ogrn,bank,kpp,okpo,raschSch,jurid,factid) {
+      fetch(`/addcorrectclient?database=${this.state.firma}&menedger=${menedger}&id=${id}&namecorp=${namecorp}&family=${family}&name=${name}&sourname=${sourname}&mail=${mail}&phone=${phone}&face=${face}&inn=${inn}&ogrn=${ogrn}&bank=${bank}&kpp=${kpp}&okpo=${okpo}&raschSch=${raschSch}&jurid=${jurid}&factid=${factid}`)
+      .then((response)=>{
+        return response.json();
+      })
+      .then((data)=> {
+        if(data["status"] == true){
+          alert("Данные изменены")
+        } else {
+          alert("Что то пошло не так")
+        }
+      })
+    }
+
+    componentDownoladClientCard(id) {
+      fetch(`/downoladClientCard?id=${id}&database=${this.state.firma}`)
+      .then((result) => {
+        return result.json();
+      })
+      .then((data) => {
+        if(data["status"] == true) {
+          this.setState(state=> ({
+            data: data["data"],
+            ClicentMyFiz: false,
+            ClicentMyCorp: false,
+            ClientAllFiz: false, 
+            ClientAllCorp: false,
+            openClientCard:true,
+            addClientele: false,  
+          }))
+        } else {alert("Что то пошло не так")}
+      })
+          
+    }
+
+    componentAddClientToServer(family,name,sourname,mail,phone,face,inn,ogrn,bank,kpp,okpo,raschSch,namecorp,factip,jurip ) {
+      fetch(`/addclient?family=${family}&name=${name}&sourname=${sourname}&mail=${mail}&phone=${phone}&face=${face}&inn=${inn}&ogrn=${ogrn}&bank=${bank}&kpp=${kpp}&okpo=${okpo}&raschSch=${raschSch}&user=${this.state.userName}&database=${this.state.firma}&namecorp=${namecorp}&factip=${factip}&jurip=${jurip}`)
       .then((result) => {
         return result.json()
       })
@@ -163,6 +210,11 @@ class App extends React.Component {
             data: data["data"],
             ClicentMyFiz: true,
             ClicentMyCorp: false,
+            ClientAllFiz: false, 
+            ClientAllCorp: false,
+            openClientCard:false,
+            addClientele: false,
+
           }))
         } else {alert("Данных не найдено")}
       })
@@ -179,6 +231,11 @@ class App extends React.Component {
             data: data["data"],
             ClicentMyFiz: false,
             ClicentMyCorp: true,
+            ClientAllFiz: false, 
+            ClientAllCorp: false,
+            openClientCard:false,
+            addClientele: false,
+
           }))
         } else {
           alert("Данные не найдены")
@@ -187,18 +244,51 @@ class App extends React.Component {
     }
 
     componentDownloadAllClientfiz() {
+      fetch(`/downloadallclientfiz?database=${this.state.firma}`)
+      .then((result) => {
+        return result.json();
+      })
+      .then((data) => {
+        if(data["status"] == true) {
+          this.setState(state=> ({
+            data: data["data"],
+            ClicentMyFiz: false,
+            ClicentMyCorp: false,
+            ClientAllFiz: true, 
+            ClientAllCorp: false,
+            openClientCard:false,
+            addClientele: false,
 
+          }))
+        } else {alert("Данных не найдено")}
+      })
     }
 
     componentDownloadAllClientcorp() {
-      
+      fetch(`/downloadallclientcorp?database=${this.state.firma}`)
+      .then((result) => {
+        return result.json();
+      })
+      .then((data) => {
+        if(data["status"] == true) {
+          this.setState(state=> ({
+            data: data["data"],
+            ClicentMyFiz: false,
+            ClicentMyCorp: false,
+            ClientAllFiz: false, 
+            ClientAllCorp: true,
+            openClientCard:false,
+            addClientele: false,
+
+          }))
+        } else {alert("Данных не найдено")}
+      })
     }
 
     componentListClienteleOuer() { //загрузить всех клиентов
       this.setState(state=> ({
         ButtonClientAll:true,
         buttonClicentMy:false,
-        addClientele: false,
       }))
     }
 
@@ -206,12 +296,16 @@ class App extends React.Component {
       this.setState(state => ({
         ButtonClientAll:false,
         buttonClicentMy:true,
-        addClientele: false,
       }))
     }
     componentAddClientele() {//Добавить клиента
       this.setState(state => ({
         addClientele: true,
+        ClicentMyFiz: false,
+        ClicentMyCorp: false,
+        ClientAllFiz: false, 
+        ClientAllCorp: false,
+        openClientCard:false,
       }))
     }
 

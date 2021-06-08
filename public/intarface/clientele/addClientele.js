@@ -86,10 +86,22 @@ export function AddClientele (props) {
         id="raschSch"
         name="raschSch" placeholder="Расчетный счет"/>
       </li>
+      <li>
+        <input className="form-employee__input input"
+        type="text"
+        id="factip"
+        name="factip" placeholder="Фактический адрес"/>
+      </li>
+      <li>
+        <input className="form-employee__input input"
+        type="text"
+        id="jurip"
+        name="jurip" placeholder="Юридический адрес"/>
+      </li>
       
     </ul>
     <button onClick={()=>{
-      componentAddClientToServer($("#family").val(),$("#name").val(),$("#sourname").val(),$("#mail").val(),$("#phone").val(),$("#face").val(),$("#inn").val(),$("#ogrn").val(),$("#bank").val(),$("#kpp").val(),$("#okpo").val(),$("#raschSch").val(),$("#namecorp").val())
+      componentAddClientToServer($("#family").val(),$("#name").val(),$("#sourname").val(),$("#mail").val(),$("#phone").val(),$("#face").val(),$("#inn").val(),$("#ogrn").val(),$("#bank").val(),$("#kpp").val(),$("#okpo").val(),$("#raschSch").val(),$("#namecorp").val(),$("#factip").val(),$("#jurip").val())
     }}>Добавить</button>
   </form>
 }

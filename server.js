@@ -1,4 +1,5 @@
 const express = require("express");
+const { data } = require("jquery");
 let app = express();
 app.use(express.static("public"));
 
@@ -87,6 +88,9 @@ app.get(`/reg`,(req,res) => { // Форма регистрации
       окпо varchar(45) DEFAULT NULL,
       расчетныйсчет varchar(45) DEFAULT NULL,
       название text,
+      комментарии text,
+      фактическийадрес text,
+      юридическийадрес text
       PRIMARY KEY (id)
     )`);
   
@@ -419,7 +423,7 @@ app.get(`/taskFromMy`, (req,res) => {
 });
 
 
-app.get("/addclient", (req,res) => { //список клиентов физ лица
+app.get("/addclient", (req,res) => { //добавление клиента
   const family = req.query.family;
   const name  = req.query.name;
   const sourname  = req.query.sourname;
@@ -435,6 +439,8 @@ app.get("/addclient", (req,res) => { //список клиентов физ ли
   const user  = req.query.user;
   const database = req.query.database;
   const namecorp = req.query.namecorp;
+  const factip = req.query.factip;
+  const jurip = req.query.jurip;
 
   const connect = mysql.createConnection({
     host: "localhost",
@@ -444,13 +450,13 @@ app.get("/addclient", (req,res) => { //список клиентов физ ли
     password: "SoupMacTavish95"
   })
 
-  connect.query(`INSERT INTO clientele (менеджер, фамилия, имя, отчество, почтаклиента, телефонклиента, лицо, инн, огрн, банк, кпп, окпо, расчетныйсчет, название) VALUES ("${user}","${family}","${name}","${sourname}","${mail}","${phone}","${face}","${inn}", "${ogrn}", "${bank}","${kpp}","${okpo}","${raschSch}","${namecorp}")`, (err, results) => {
+  connect.query(`INSERT INTO clientele (менеджер, фамилия, имя, отчество, почтаклиента, телефонклиента, лицо, инн, огрн, банк, кпп, окпо, расчетныйсчет, название,фактическийадрес,юридическийадрес ) VALUES ("${user}","${family}","${name}","${sourname}","${mail}","${phone}","${face}","${inn}", "${ogrn}", "${bank}","${kpp}","${okpo}","${raschSch}","${namecorp}","${factip}","${jurip}")`, (err, results) => {
     res.send({status:true})
   })
 }) 
 
 
-app.get("/downloadmyclientfiz", (req,res) => {
+app.get("/downloadmyclientfiz", (req,res) => { //загрузка физических клиентов менеджера 
   const user  = req.query.user;
   const database = req.query.database;
 
@@ -483,7 +489,7 @@ app.get("/downloadmyclientfiz", (req,res) => {
   })
 })
 
-app.get("/downloadmyclientcorp", (req,res) => {
+app.get("/downloadmyclientcorp", (req,res) => { // загрузка корпоративных клиентов менеджера
   const user  = req.query.user;
   const database = req.query.database;
 
@@ -496,7 +502,7 @@ app.get("/downloadmyclientcorp", (req,res) => {
   })
 
   connect.query(`SELECT * FROM clientele WHERE менеджер = '${user}' AND лицо = 'юридическое'`, (err, results)=> {
-    console.log(results.length)
+
     if(err == null && results.length !==0) {
 
       let data = {};
@@ -516,6 +522,136 @@ app.get("/downloadmyclientcorp", (req,res) => {
     
   })
 
+})
+
+app.get("/downloadallclientfiz", (req, res)=> {// загрузка все физ лиц клиентов
+  const database = req.query.database;
+
+  const connect = mysql.createConnection({
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    database: database,
+    password: "SoupMacTavish95"
+  })
+
+  connect.query(`SELECT * FROM clientele WHERE лицо = "физическое"`, (err, results) => {
+    if(err == null && results.length !==0) {
+
+      let data = {};
+
+      for(let i = 0; i < results.length; i++) {
+        data[results[i]["id"]] = results[i]
+      }
+  
+      res.send({data:data, status:true})
+    } else if (results.length == 0) {
+      res.send({status:false})
+
+    } else {
+      res.send({status: false})
+    }
+  })
+})
+
+app.get("/downloadallclientcorp", (req, res)=> {//загрузка всех юр лиц клиентов
+  const database = req.query.database;
+
+  const connect = mysql.createConnection({
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    database: database,
+    password: "SoupMacTavish95"
+  })
+
+  connect.query(`SELECT * FROM clientele WHERE лицо = "юридическое"`, (err, results) => {
+    if(err == null && results.length !==0) {
+
+      let data = {};
+
+      for(let i = 0; i < results.length; i++) {
+        data[results[i]["id"]] = results[i]
+      }
+  
+      res.send({data:data, status:true})
+    } else if (results.length == 0) {
+      res.send({status:false})
+
+    } else {
+      res.send({status: false})
+    }
+  })
+})
+
+
+app.get("/downoladClientCard", (req,res)=> {
+  const id = req.query.id;
+  const database = req.query.database;
+
+  const connect = mysql.createConnection({
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    database: database,
+    password: "SoupMacTavish95"
+  });
+
+  connect.query(`SELECT * FROM clientele WHERE id = "${id}"`, (err, results) =>{
+    if(err == null && results.length !== 0) {
+      let data = {};
+
+      for(let i = 0; i < results.length; i++) {
+        data[results[i]["id"]] = results[i]
+      }
+      
+      res.send({data:data, status:true})
+    } else {
+      res.send({status:false})
+    }
+  })
+})
+
+app.get("/addcorrectclient", (req,res)=> {
+
+  const database = req.query.database;
+  const menedger = req.query.menedger;
+  const id = req.query.id;
+  const namecorp = req.query.namecorp;
+  const family = req.query.family;
+  const name = req.query.name;
+  const sourname = req.query.sourname;
+  const mail = req.query.mail;
+  const phone = req.query.phone;
+  const face = req.query.face;
+  const inn = req.query.inn;
+  const ogrn = req.query.ogrn;
+  const bank = req.query.bank;
+  const kpp = req.query.kpp;
+  const okpo = req.query.okpo;
+  const raschSch = req.query.raschSch;
+  const jurid = req.query.jurid;
+  const factid = req.query.factid;
+
+
+
+  const connect = mysql.createConnection({
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    database: database,
+    password: "SoupMacTavish95"
+  })
+
+  connect.query(`UPDATE clientele SET менеджер="${menedger}", фамилия="${family}", имя="${name}", отчество="${sourname}", почтаклиента="${mail}", телефонклиента="${phone}", лицо="${face}", инн="${inn}", огрн="${ogrn}", банк="${bank}", кпп="${kpp}", окпо="${okpo}", расчетныйсчет="${raschSch}", название="${namecorp}",фактическийадрес="${factid}",юридическийадрес="${jurid}"  WHERE id="${id}"`, 
+  (err, results)=> {
+    console.log(err)
+    if(err == null) {
+      res.send({ status:true})
+    } else {
+      res.send({status:false})
+    }
+  })
 })
 
 app.listen(3000);

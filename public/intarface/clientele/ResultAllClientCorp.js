@@ -1,18 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-export function ResultMyClientFiz(props) {
+export function ResultAllClientCorp (props) {
     const {data} = props.props.props.props.props.props.state;
-    const componentDownoladClientCard = props.props.props.props.props.props.componentDownoladClientCard;
     let result = [];
+    const componentDownoladClientCard = props.props.props.props.props.props.componentDownoladClientCard;
 
     for(let key in data) {
         result.push(
             <li className="clientCard" key={key}>
                 <ul className="">
                     <li>
-                        <h2>Фамилия</h2>
-                        <p>{data[key]["фамилия"]}</p>
+                        <h2>Название</h2>
+                        <p>{data[key]["название"]}</p>
                     </li>
                     <li>
                         <h2>Имя</h2>
