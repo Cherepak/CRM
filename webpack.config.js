@@ -3,12 +3,12 @@ const path = require("path");
 
 module.exports = {
   mode: 'development',
-  entry: "./public/app.js",
+  entry: "./app.js",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "public/dist")
+    path: path.resolve(__dirname, "dist")
   },
-  // watch: true,
+  watch: true,
   // watchOptions: {
   //     aggregateTimeout: 500,
   //     poll: 1000 // порверяем измемения раз в секунду
