@@ -14,7 +14,7 @@ import {store} from "../app.js"
 import {ContentWrapper} from "./contentWrapper"
 
 export function IntarfaceForWork (props) { 
-
+  
   return <div>
     <header className="intarface__header">
       <div className="containerForInerface padding flex">
@@ -31,37 +31,37 @@ export function IntarfaceForWork (props) {
           <li>
             <button className="button"
             onClick={()=>{
-               
+              store.dispatch(actionEmployee())
             }}>Сотрудники</button>
           </li>
           <li>
             <button className="button"
             onClick={()=>{
-               
+              store.dispatch(actionTask())
             }}>Задачи</button>
           </li>
           <li>
             <button className="button"
             onClick={()=>{
-               
+              store.dispatch(actionClientle())
             }}>Клиенты</button>
           </li>
           <li>
             <button className="button"
             onClick={()=>{
-             
+              store.dispatch(actionMassage())
             }}>Чат</button>
           </li>
           <li>
             <button className="button"
             onClick={()=>{
-               
+              store.dispatch(actionSklad())
             }}>Склад</button>
           </li>
           <li>
             <button className="button"
             onClick={()=>{
-               
+              store.dispatch(actionSetting())
             }}>Настройки</button>
           </li>
         </ul>
@@ -73,7 +73,7 @@ export function IntarfaceForWork (props) {
     </header>
 
     <main className="reletive">
-      <ContentWrapper props={props}/>
+      <ContentWrapper />
     </main>
   </div>
 }

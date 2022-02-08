@@ -276,3 +276,11 @@ address {
   padding: 5px 10px;
   box-shadow: 0 0 8px #000;
 }
+
+.employeeImage {
+  width: 150px;
+}
+
+.fontSize12 {
+  font-size: 12px;
+}

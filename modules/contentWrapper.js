@@ -12,7 +12,7 @@ import {store} from "../app"
 
 
 export function ContentWrapper (props) {
-
+  
   if(store.getState()["TableWork"]) {
     return <TableWork />;
   } else if(store.getState()["Employee"]) {
