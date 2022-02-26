@@ -76,25 +76,41 @@ switch (action.type) {
         }    
     case "OPEN__PROFILE":
         return {...state,
+            addEmployee: action.addEmployee,
             profile: action.profile,
             profileRedact: action.profileRedact,
             id: action.id,
         }   
         case "CLOSE__PROFILE":
         return {...state,
+            addEmployee: action.addEmployee,
             profile: action.profile,
             profileRedact: action.profileRedact
         }   
         case "PROFILE__REDACT":
         return {...state,
+            addEmployee: action.addEmployee,
             profile: action.profile,
             profileRedact: action.profileRedact
         }   
         case "CLOSE__REDACTPROFILE":
         return {...state,
+            addEmployee: action.addEmployee,
             profile: action.profile,
             profileRedact: action.profileRedact,
             id: action.id,
+        }  
+        case "ADD__EMPLOYEE":
+        return {...state,
+            addEmployee: action.addEmployee,
+            profile: action.profile,
+            profileRedact: action.profileRedact,
+        }  
+        case "CLOSE__ADD__EMPLOYEE":
+        return {...state,
+            addEmployee: action.addEmployee,
+            profile: action.profile,
+            profileRedact: action.profileRedact,
         }  
         
 }

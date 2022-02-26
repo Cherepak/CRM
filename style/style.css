@@ -13,7 +13,15 @@ body {
 .flex {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+}
+
+.flex-center {
+  align-items: center;
+}
+
+
+.flex-start {
+  align-items: start;
 }
 
 .space-between {
@@ -120,6 +128,7 @@ address {
 }
 
 .reletive {
+  padding: 10px 5px 0 5px;
   position: relative;
 }
 
@@ -136,6 +145,7 @@ address {
 }
 
 .leftBlock {
+  border-right: 1px solid #0000001f;
   width: 300px;
 }
 

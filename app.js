@@ -7,8 +7,10 @@ import {reducer} from "./modules/reducers/reducer.js"
 import {listEmployee} from "./modules/storeTest"
 
 export const initialState = {
+  status: "admin",
   TableWork  : false,
   Employee  : true,
+    addEmployee:false,
     profile: false,
     profileRedact: false,
   Task : false,
@@ -34,6 +36,7 @@ const mapStateToProps = (state) => {
     return {
       TableWork  : state.TableWork,
       Employee  : state.Employee,
+        addEmployee: state.addEmployee,
         profile: state.profile,
         profileRedact: state.profileRedact,
       Task : state.Task,
