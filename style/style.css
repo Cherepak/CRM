@@ -13,8 +13,11 @@ body {
 .flex {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
 }
 
 .dispaly-block {
@@ -42,6 +45,10 @@ body {
   position: absolute;
   width: 1px;
   white-space: nowrap;
+}
+
+.margin-right {
+  margin-right: 30px;
 }
 
 a {

@@ -17,7 +17,7 @@ export function IntarfaceForWork (props) {
   
   return <div>
     <header className="intarface__header">
-      <div className="containerForInerface padding flex">
+      <div className="containerForInerface padding space-between flex">
         <div>
           <img className="logo" src="image/logo/logo.png" alt="Логотип"/>
         </div>

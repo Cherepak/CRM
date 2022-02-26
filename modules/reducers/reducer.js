@@ -74,7 +74,30 @@ switch (action.type) {
             Massage : action.Massage ,
             Setting : action.Setting ,
         }    
-          
+    case "OPEN__PROFILE":
+        return {...state,
+            TableWork  : action.TableWork ,
+            Employee  : action.Employee ,
+                profile: action.profile,
+                id: action.id,
+            Task : action.Task ,
+            Sklad  : action.Sklad ,
+            Clientele : action.Clientele ,
+            Massage : action.Massage ,
+            Setting : action.Setting ,
+        }   
+        case "CLOSE__PROFILE":
+        return {...state,
+            TableWork  : action.TableWork ,
+            Employee  : action.Employee ,
+                profile: action.profile,
+            Task : action.Task ,
+            Sklad  : action.Sklad ,
+            Clientele : action.Clientele ,
+            Massage : action.Massage ,
+            Setting : action.Setting ,
+        }   
+        
 }
 
     return {...state}

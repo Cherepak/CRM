@@ -9,11 +9,13 @@ import {listEmployee} from "./modules/storeTest"
 export const initialState = {
   TableWork  : false,
   Employee  : true,
+    profile: false,
   Task : false,
   Sklad  : false,
   Clientele : false,
   Massage : false,
   Setting : false,
+    
 }
 
 export const store = createStore(reducer, initialState);
@@ -31,6 +33,7 @@ const mapStateToProps = (state) => {
     return {
       TableWork  : state.TableWork,
       Employee  : state.Employee,
+        profile: state.profile,
       Task : state.Task,
       Sklad  : state.Sklad,
       Clientele : state.Clientele,
