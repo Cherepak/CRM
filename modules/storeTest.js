@@ -1,9 +1,7 @@
 export const listEmployee = [
     {
         id: 1,
-        name: "Петр",
-        sourName: "Афанасьев",
-        secondName: "Петрович",
+        name: "Афанасьев Петр Петрович",
         birthday: new Date(),
         strukture: "Аналитика",//отдел
         email : "mail@mail.ru",
@@ -12,9 +10,7 @@ export const listEmployee = [
     }, 
     {
         id: 2,
-        name: "Петр",
-        sourName: "Бурунов",
-        secondName: "Петрович",
+        name: "Бурунов Петр Петрович",
         birthday: new Date(),
         strukture: "IT",//отдел
         email : "mail@mail.ru",
@@ -23,9 +19,7 @@ export const listEmployee = [
     },
     {
         id: 3,
-        name: "Петр",
-        sourName: "Генадиев",
-        secondName: "Петрович",
+        name: "Генадиев Петр Петрович",
         birthday: new Date(),
         strukture: "IT",//отдел
         email : "mail@mail.ru",
@@ -34,9 +28,7 @@ export const listEmployee = [
     },
     {
         id: 4,
-        name: "Петр",
-        sourName: "Петров",
-        secondName: "Петрович",
+        name: "Петров Петр Петрович",
         birthday: new Date(),
         strukture: "Test",//отдел
         email : "mail@mail.ru",
@@ -45,9 +37,7 @@ export const listEmployee = [
     },
     {
         id: 5,
-        name: "Петр",
-        sourName: "Яковлев",
-        secondName: "Петрович",
+        name: "Яковлев Петр Петрович",
         birthday: new Date(),
         strukture: "Разработка",//отдел
         email : "mail@mail.ru",
@@ -55,4 +45,15 @@ export const listEmployee = [
         img: "../image/1.jpg"
     },
 
+]
+
+const listMyTask = [
+    {
+        id:1,
+        title: "Первая задача",
+        text: "text",
+        dateStart: new Date(),
+        dateFinish: new Date(),
+        implementer: ""
+    }
 ]

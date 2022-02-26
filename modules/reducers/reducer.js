@@ -76,27 +76,26 @@ switch (action.type) {
         }    
     case "OPEN__PROFILE":
         return {...state,
-            TableWork  : action.TableWork ,
-            Employee  : action.Employee ,
-                profile: action.profile,
-                id: action.id,
-            Task : action.Task ,
-            Sklad  : action.Sklad ,
-            Clientele : action.Clientele ,
-            Massage : action.Massage ,
-            Setting : action.Setting ,
+            profile: action.profile,
+            profileRedact: action.profileRedact,
+            id: action.id,
         }   
         case "CLOSE__PROFILE":
         return {...state,
-            TableWork  : action.TableWork ,
-            Employee  : action.Employee ,
-                profile: action.profile,
-            Task : action.Task ,
-            Sklad  : action.Sklad ,
-            Clientele : action.Clientele ,
-            Massage : action.Massage ,
-            Setting : action.Setting ,
+            profile: action.profile,
+            profileRedact: action.profileRedact
         }   
+        case "PROFILE__REDACT":
+        return {...state,
+            profile: action.profile,
+            profileRedact: action.profileRedact
+        }   
+        case "CLOSE__REDACTPROFILE":
+        return {...state,
+            profile: action.profile,
+            profileRedact: action.profileRedact,
+            id: action.id,
+        }  
         
 }
 
