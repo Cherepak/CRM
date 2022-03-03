@@ -16,6 +16,16 @@ export function TableWork () {
         return result.length
     }
 
+    function DontCompliteTask() {
+        let result = [];
+        for(let key in listMyTask) {
+            if (listMyTask[key]["status"] === false) {
+                result.push(listMyTask[key])
+            }
+        }
+        return result.length
+    }
+
     return <div className="container flex space-between">
         <section className="">
             <h2 className="sr-only">Задачи:</h2>
@@ -23,7 +33,7 @@ export function TableWork () {
                 <h2 className="margin-right">
                     Задачи:
                 </h2>
-                <p>У Вас накопилось: {listMyTask.length} задачи</p>
+                <p>У Вас накопилось: <DontCompliteTask/> задачи</p>
             </div>
             <button>Перейти к задачам</button>
         </section>

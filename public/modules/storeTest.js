@@ -55,7 +55,9 @@ export const listMyTask = [
         dateStart: new Date(),
         dateFinish: new Date(),
         implementer: "",
-        status: false
+        status: false,
+        from:"",
+        to: ""
     },
 
     {
@@ -65,7 +67,9 @@ export const listMyTask = [
         dateStart: new Date(),
         dateFinish: new Date(),
         implementer: "",
-        status: true
+        status: true,
+        from:"",
+        to: ""
     },
 
     {
@@ -75,7 +79,9 @@ export const listMyTask = [
         dateStart: new Date(),
         dateFinish: new Date(),
         implementer: "",
-        status: false
+        status: false,
+        from:"",
+        to: ""
     }
 ]
 

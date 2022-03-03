@@ -1,16 +1,44 @@
 import React from "react";
 import ReactDOM, { render } from "react-dom";
 import {store} from "../../../app";
-import {listEmployee} from "../../storeTest";
+import {listEmployee,listMyTask} from "../../storeTest";
 
 export function TaskContent() {
     if(store.getState().myTask) {
-        return <div>
-            myTask
-        </div>
+         let result = [];
+
+        for(let key in listMyTask) {
+            if(!listMyTask[key]["status"]) {
+                result.push(
+                    <li key={key}>
+                        <h2>Тема: {listMyTask[key]["title"]}</h2>
+                        <p>Задача: {listMyTask[key]["text"]}</p>
+                        <p>Начало: {listMyTask[key]["dateStart"].toLocaleDateString()}.</p>
+                        <p>Окончание: {listMyTask[key]["dateFinish"].toLocaleDateString()}</p>
+                        {listMyTask[key]["status"] ? "Выполнено":"Не выполнено"}
+                    </li>);
+            } 
+        }
+        
+        return <ul>{result}</ul>
+    } else if (store.getState().added) {
+        return <div></div>
     } 
     else if(store.getState().allTask) {
-        return <div>allTask</div>
+        let result = [];
+
+        for(let key in listMyTask) {
+            result.push(
+            <li key={key}>
+                <h2>Тема: {listMyTask[key]["title"]}</h2>
+                <p>Задача: {listMyTask[key]["text"]}</p>
+                <p>Начало: {listMyTask[key]["dateStart"].toLocaleDateString()}.</p>
+                <p>Окончание: {listMyTask[key]["dateFinish"].toLocaleDateString()}</p>
+                {listMyTask[key]["status"] ? "Выполнено":"Не выполнено"}
+            </li>);
+        }
+        
+        return <ul>{result}</ul>
     }
     else if(store.getState().addTask) {
         
@@ -43,6 +71,8 @@ export function TaskContent() {
                     <label>Для кого задача</label>
                     <ListEmployee/>
                 </div>
+
+                <button>Отправить</button>
             </form>
         </div>
     }

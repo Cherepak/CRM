@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM, { render } from "react-dom";
 import {store} from "../../../app"
-import {myTask,addTask,allTask} from "../../actions/contentTask/contentTask"
+import {myTask,addTask,allTask,addedTask} from "../../actions/contentTask/contentTask"
 import {TaskContent} from "./taskContent"
 
 
@@ -12,7 +12,7 @@ export function Task () {
                 <button
                 onClick={()=> {
                     store.dispatch(allTask())
-                }}>Все задачи</button>
+                }}>Все текущие задачи</button>
             </li>
 
             <li>
@@ -20,6 +20,13 @@ export function Task () {
                 onClick={()=> {
                     store.dispatch(myTask())
                 }}>Текущие задачи</button>
+            </li>
+
+            <li>
+                <button
+                onClick={()=> {
+                    store.dispatch(addedTask())
+                }}>Поставленные задачи</button>
             </li>
 
             <li>
