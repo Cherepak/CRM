@@ -1,6 +1,7 @@
 ul {
     list-style: none;
     padding: inherit;
+    margin: 0;
 }
 
 body {
@@ -108,7 +109,7 @@ a:focus {
 }
 
 button {
-    background:none;
+    background-color: #eeeeee63;
     border: none;
     outline: none;
     padding: 8px 10px;

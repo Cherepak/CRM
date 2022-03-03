@@ -22,37 +22,37 @@ export function IntarfaceForWork (props) {
           <img className="logo" src="image/logo/logo.png" alt="Логотип"/>
         </div>
         <ul className="flex intarface__header-list">
-          <li>
+          <li className="margin-right">
             <button className="button"
             onClick={()=>{
                store.dispatch(actionTableWork())
             }}>Рабочий стол</button>
           </li>
-          <li>
+          <li className="margin-right">
             <button className="button"
             onClick={()=>{
               store.dispatch(actionEmployee())
             }}>Сотрудники</button>
           </li>
-          <li>
+          <li className="margin-right">
             <button className="button"
             onClick={()=>{
               store.dispatch(actionTask())
             }}>Задачи</button>
           </li>
-          <li>
+          <li className="margin-right">
             <button className="button"
             onClick={()=>{
               store.dispatch(actionClientle())
             }}>Клиенты</button>
           </li>
-          <li>
+          <li className="margin-right">
             <button className="button"
             onClick={()=>{
               store.dispatch(actionMassage())
             }}>Чат</button>
           </li>
-          <li>
+          <li className="margin-right">
             <button className="button"
             onClick={()=>{
               store.dispatch(actionSklad())
@@ -67,7 +67,7 @@ export function IntarfaceForWork (props) {
         </ul>
 
         <div className="user">
-            Здесь будет имя
+            {store.getState().user}
         </div>
       </div>
     </header>

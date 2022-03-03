@@ -7,13 +7,19 @@ import {reducer} from "./modules/reducers/reducer.js"
 import {listEmployee} from "./modules/storeTest"
 
 export const initialState = {
+
+  user: "Черепаха Дмитрий Вадимович",
   status: "admin",
   TableWork  : false,
-  Employee  : true,
+    time: new Date,
+  Employee  : false,
     addEmployee:false,
     profile: false,
     profileRedact: false,
-  Task : false,
+  Task : true,
+    allTask:false,
+    myTask: false,
+    addTask: false,
   Sklad  : false,
   Clientele : false,
   Massage : false,
@@ -23,7 +29,7 @@ export const initialState = {
 
 export const store = createStore(reducer, initialState);
 
-function App (state) {
+function App () {
 
   return (
     <div>
@@ -34,12 +40,17 @@ function App (state) {
 const mapStateToProps = (state) => {
 
     return {
+      user: state.user,
       TableWork  : state.TableWork,
+        time: state.time,
       Employee  : state.Employee,
         addEmployee: state.addEmployee,
         profile: state.profile,
         profileRedact: state.profileRedact,
       Task : state.Task,
+        allTask: state.allTask,
+        myTask: state.myTask,
+        addTask: state.addTask,
       Sklad  : state.Sklad,
       Clientele : state.Clientele,
       Massage : state.Massage,

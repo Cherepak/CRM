@@ -74,6 +74,24 @@ switch (action.type) {
             Massage : action.Massage ,
             Setting : action.Setting ,
         }    
+    case "MY__TASK":
+    return {...state,
+        allTask: action.allTask,
+        myTask: action.myTask ,
+        addTask: action.addTask ,
+    }
+    case "ADD__TASK":
+    return {...state,
+        allTask: action.allTask,
+        myTask: action.myTask ,
+        addTask: action.addTask ,
+    }
+    case "ALL__TASK":
+    return {...state,
+        allTask: action.allTask,
+        myTask: action.myTask ,
+        addTask: action.addTask ,
+    }
     case "OPEN__PROFILE":
         return {...state,
             addEmployee: action.addEmployee,
@@ -112,6 +130,11 @@ switch (action.type) {
             profile: action.profile,
             profileRedact: action.profileRedact,
         }  
+        case "UPDATE":
+        return {
+            ...state,
+            time: action.time
+        }
         
 }
 

@@ -47,13 +47,56 @@ export const listEmployee = [
 
 ]
 
-const listMyTask = [
+export const listMyTask = [
     {
         id:1,
         title: "Первая задача",
-        text: "text",
+        text: "text1",
         dateStart: new Date(),
         dateFinish: new Date(),
-        implementer: ""
+        implementer: "",
+        status: false
+    },
+
+    {
+        id:2,
+        title: "Вторая задача",
+        text: "text2",
+        dateStart: new Date(),
+        dateFinish: new Date(),
+        implementer: "",
+        status: true
+    },
+
+    {
+        id:3,
+        title: "Третья задача",
+        text: "text3",
+        dateStart: new Date(),
+        dateFinish: new Date(),
+        implementer: "",
+        status: false
+    }
+]
+
+
+export const massage = [
+    {
+        id:1,
+        massage: "qqqqqqqqqqqq",
+        date: new Date(),
+        state: true,
+    },
+    {
+        id:2,
+        massage: "wwwwwwwwwwwwwww",
+        date: new Date(),
+        state: false,
+    },
+    {
+        id:3,
+        massage: "eeeeeeeeeeeeeee",
+        date: new Date(),
+        state: false,
     }
 ]

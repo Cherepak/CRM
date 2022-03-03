@@ -1,26 +1,35 @@
 import React from "react";
 import ReactDOM, { render } from "react-dom";
 import {store} from "../../../app"
-import {myTask} from "../../actions/contentTask/contentTask"
-import {addTask} from "../../actions/contentTask/contentTask"
-
+import {myTask,addTask,allTask} from "../../actions/contentTask/contentTask"
+import {TaskContent} from "./taskContent"
 
 
 export function Task () {
     return <div className="flex">
-        <div className="leftBlock">
-            <button
-            onClick={()=> {
-                store.dispatch(myTask())
-            }}>Мои задачи</button>
-            <button
-            onClick={()=> {
-                store.dispatch(addTask())
-            }}>Поставить задачу</button>
-        </div>
+        <ul className="leftBlock margin-right">
+            <li>
+                <button
+                onClick={()=> {
+                    store.dispatch(allTask())
+                }}>Все задачи</button>
+            </li>
 
-        <div>
+            <li>
+                <button
+                onClick={()=> {
+                    store.dispatch(myTask())
+                }}>Текущие задачи</button>
+            </li>
 
-        </div>
+            <li>
+                <button
+                onClick={()=> {
+                    store.dispatch(addTask())
+                }}>Поставить задачу</button>
+            </li>
+        </ul>
+
+       <TaskContent/>
     </div>
 }

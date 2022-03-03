@@ -2,12 +2,7 @@ import React from "react";
 import ReactDOM, { render } from "react-dom";
 import { store } from "../../../app";
 import {listEmployee} from "../../storeTest"
-import {openProfile} from "../../actions/contentEmployee/actionsForEmployeeWrapper"
-import {closeProfile} from "../../actions/contentEmployee/actionsForEmployeeWrapper"
-import {profileRedact} from "../../actions/contentEmployee/actionsForEmployeeWrapper"
-import {closeRedactEployee} from "../../actions/contentEmployee/actionsForEmployeeWrapper"
-import {addEmployee} from "../../actions/contentEmployee/actionsForEmployeeWrapper" 
-import {closeAddEployee} from "../../actions/contentEmployee/actionsForEmployeeWrapper" 
+import {openProfile,closeProfile,profileRedact,closeRedactEployee,addEmployee,closeAddEployee} from "../../actions/contentEmployee/actionsForEmployeeWrapper"
 
 export function  Employee () {
     
