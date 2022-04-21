@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
 import {Massage} from "./content/Massage/massage"
 import {Setting} from "./content/Setting/setting"

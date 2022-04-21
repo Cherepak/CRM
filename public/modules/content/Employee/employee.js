@@ -1,34 +1,41 @@
 import React from "react";
-import ReactDOM, { render } from "react-dom";
 import { store } from "../../../app";
-import {listEmployee} from "../../storeTest"
-import {openProfile,closeProfile,profileRedact,closeRedactEployee,addEmployee,closeAddEployee} from "../../actions/contentEmployee/actionsForEmployeeWrapper"
+
+import {openProfile,
+    closeProfile,
+    profileRedact,
+    closeRedactEployee,
+    addEmployee,
+    closeAddEployee
+} from "../../actions/contentEmployee/actionsForEmployeeWrapper"
 
 export function  Employee () {
+
+    let listEmployee = store.getState()["listEmployee"];
     
-    if (store.getState()["profile"]) {
+    if (store.getState()["profile"]) {//профиль сотрудника
         let result = [];
-        
+
         for(let key in listEmployee) {
-           
+          
             if(listEmployee[key]["id"] == store.getState()["id"]) {
     
                 result.push(
                     <div className="flex">
-                        <img className="employeeImage margin-right" src={listEmployee[key]["img"]}/>
+                        <img className="employeeImage margin-right" 
+                        src={listEmployee[key]["Фотография"]} 
+                        alt="Фото сотрудника"/>
                         
                         <div> 
-                            <p> {listEmployee[key]["name"]}</p>
+                            <p> {listEmployee[key]["ФИО"]}</p>
 
-                            <p>Дата рождения: {`${listEmployee[key]["birthday"].getDate()}.
-                            ${listEmployee[key]["birthday"].getMonth()}.
-                            ${listEmployee[key]["birthday"].getFullYear()}`}</p>
+                            <p>Дата рождения: {listEmployee[key]["Датарождения"]}</p>
 
-                            <p>Почта: {listEmployee[key]["email"]}</p>
+                            <p>Почта: {listEmployee[key]["Почта"]}</p>
                         
-                            <p>Номер телефона: {listEmployee[key]["numberPhone"]}</p>
+                            <p>Номер телефона: {listEmployee[key]["Номер"]}</p>
 
-                            { store.getState()["status"] == "admin" ? <button
+                            { store.getState()["Статус"] == "admin" ? <button
                             onClick={()=> {
                                 store.dispatch(profileRedact())
                             }}>Редактировать профиль</button>: ""}
@@ -50,7 +57,7 @@ export function  Employee () {
         }
        
     } 
-    else if (store.getState()["profileRedact"]) {
+    else if (store.getState()["profileRedact"]) { //редактировать профиль
         let id = store.getState()["id"];
 
         return <div className="container flex space-between flex-start">
@@ -127,9 +134,9 @@ export function  Employee () {
                     store.dispatch(closeRedactEployee(id))
                 }}>Вернуться</button>
         </div>
-    } else if (store.getState()["addEmployee"]) {
+    } else if (store.getState()["addEmployee"]) {//добавить сотрудника
         return <div className="container flex space-between flex-start">
-        <form>
+        <div>
             <div>
                 <label className="d-block ">Фамилия</label>
                 <input
@@ -161,7 +168,7 @@ export function  Employee () {
                 <label className="d-block ">Дата рождения</label>
                 <input
                 className="inputRedactEmployee" 
-                type="text" 
+                type="date" 
                 id="birthday" 
                 name="birthday" 
                 placeholder="Дата рождения"/>
@@ -176,6 +183,15 @@ export function  Employee () {
                 placeholder="Эл. почта"/>
             </div>
             <div>
+                <label className="d-block ">Отдел</label>
+                <input
+                className="inputRedactEmployee" 
+                type="text" 
+                id="structure" 
+                name="structure" 
+                placeholder="Отдел"/>
+            </div>
+            <div>
                 <label className="d-block ">Номер телефона</label>
                 <input
                 className="inputRedactEmployee" 
@@ -185,6 +201,13 @@ export function  Employee () {
                 placeholder="Номер телефона"/>
             </div>
             <div>
+                <label className="d-block ">Статус</label>
+                <select id="status">
+                    <option value={"user"}>User</option>
+                    <option value={"admin"}>Admin</option>
+                </select>
+            </div>
+            {/* <div>
                 <label className="d-block ">Загрузить фотографию</label>
                 <input
                 className="inputRedactEmployee" 
@@ -193,33 +216,61 @@ export function  Employee () {
                 id="img" 
                 name="img" 
                 />
-            </div>
+            </div> */}
 
-            <button>Отправить</button>
-        </form>
+            <button onClick={()=>{
+                let sourName = document.getElementById("sourName").value;
+                let name = document.getElementById("name").value;
+                let secondName = document.getElementById("secondName").value;
+                let birthday = document.getElementById("birthday").value;
+                let mail = document.getElementById("email").value;
+                let tel  = document.getElementById("tel").value;
+                let status  = document.getElementById("status").value;
+                let structure  = document.getElementById("structure").value;
+
+                fetch(`addrpofile?отдел=${structure}&статус=${status}&фамилия=${sourName}&имя=${name}&отчество=${secondName}&датарождения=${birthday}&почта=${mail}&номер=${tel}`)
+                .then(result => {
+                    return result.json()
+                })
+                .then(data=>{
+                    console.log(data)
+                    if(data.status){
+                      alert("Данные добавлены")
+                    } else if (data.status == false){
+                        alert('Что то пошло не так')
+                    }
+                })
+                .catch(err => {
+                    console.log("Ошибка " + err)
+                })
+            }}>Отправить</button>
+        </div>
 
         <button onClick={()=> {
             store.dispatch(closeAddEployee())
         }}>Вернуться</button>
     </div>
         
-    } else {
+    } else {// начальная страничка
         let result = [];
 
         for(let key in listEmployee) {
+
             let idKey = listEmployee[key]["id"];
             result.push(
             <li className="flex flex-center space-between margin-bottom" key={key}>
                 <div className="flex">
-                    <img className="employeeImage margin-right" src={listEmployee[key]["img"]}/>
+                    <img className="employeeImage margin-right" 
+                    src={listEmployee[key]["Фотография"]}
+                    alt="Фотография сотрудника"/>
                     
                     <div>  
 
-                        <p>{listEmployee[key]["name"]}</p>
+                        <p>{listEmployee[key]["ФИО"]}</p>
 
-                        <p>{listEmployee[key]["email"]}</p>
+                        <p>{listEmployee[key]["Почта"]}</p>
                     
-                        <p>{listEmployee[key]["numberPhone"]}</p>
+                        <p>{listEmployee[key]["Номер"]}</p>
                     </div>
                 </div>
 

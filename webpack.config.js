@@ -6,7 +6,7 @@ module.exports = {
   entry: "./public/app.js",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "public/dist")
   },
   watch: true,
   // watchOptions: {
@@ -23,7 +23,10 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env','@babel/preset-react']
+            presets: ['@babel/preset-env','@babel/preset-react'],
+            plugins: [
+            ["@babel/transform-runtime"]
+          ]
           }
         }
        },

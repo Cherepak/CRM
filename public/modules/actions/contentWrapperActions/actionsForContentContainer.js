@@ -27,9 +27,11 @@ export function actionClientle () {
     }
 }
 
-export function actionEmployee () {
+export function actionEmployee (data) {
+
     return {
-        type: "CHOICE__EMPLOYEE",
+        type : "CHOICE__EMPLOYEE",
+        listEmployee : data,
         TableWork  : false,
         Employee  : true,
         Task : false,

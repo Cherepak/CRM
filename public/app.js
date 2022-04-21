@@ -4,19 +4,18 @@ import {createStore} from "redux"
 import {connect, Provider} from "react-redux"
 import {Main} from "./modules/main";
 import {reducer} from "./modules/reducers/reducer.js"
-import {listEmployee} from "./modules/storeTest"
+
 
 export const initialState = {
-
-  user: "Черепаха Дмитрий Вадимович",
+  
+  user: "Антонов Антон Антонович",
   status: "admin",
   TableWork  : false,
-    time: new Date,
-  Employee  : false,
+  Employee  : true,
     addEmployee:false,
     profile: false,
     profileRedact: false,
-  Task : true,
+  Task : false,
     allTask:false,
     myTask: false,
     addTask: false,
@@ -43,7 +42,6 @@ const mapStateToProps = (state) => {
     return {
       user: state.user,
       TableWork  : state.TableWork,
-        time: state.time,
       Employee  : state.Employee,
         addEmployee: state.addEmployee,
         profile: state.profile,

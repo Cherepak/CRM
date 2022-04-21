@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
 import {actionTableWork} from "./actions/contentWrapperActions/actionsForContentContainer"
 import {actionClientle} from "./actions/contentWrapperActions/actionsForContentContainer"
@@ -31,7 +30,19 @@ export function IntarfaceForWork (props) {
           <li className="margin-right">
             <button className="button"
             onClick={()=>{
-              store.dispatch(actionEmployee())
+              fetch("/listEmployee")
+              .then(result => {
+                    return result.json()
+                })
+                .then(data => {
+                
+                  store.dispatch(actionEmployee(data))
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+
+              
             }}>Сотрудники</button>
           </li>
           <li className="margin-right">

@@ -26,6 +26,7 @@ switch (action.type) {
         }
     case "CHOICE__EMPLOYEE":
         return {...state,
+            listEmployee : action.listEmployee,
             TableWork  : action.TableWork ,
             Employee  : action.Employee ,
             Task : action.Task ,
