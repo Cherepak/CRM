@@ -9,28 +9,54 @@ export function Task () {
         <ul className="leftBlock margin-right">
             <li>
                 <button
-                onClick={()=> {
-                    store.dispatch(allTask())
-                }}>Все текущие задачи</button>
+                onClick={()=> {//запрос на все задачи
+                    let name = store.getState()["user"]
+                
+                    fetch(`/allmytask?name=${name}`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        store.dispatch(allTask(data))
+                    })
+                }}>Все мои задачи</button>
             </li>
 
             <li>
                 <button
-                onClick={()=> {
-                    store.dispatch(myTask())
+                onClick={()=> {// запрос на текущие задачи
+                    let name = store.getState()["user"]
+
+                    fetch(`/mytask?name=${name}`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        store.dispatch(myTask(data))
+                    })
                 }}>Текущие задачи</button>
             </li>
 
             <li>
                 <button
-                onClick={()=> {
-                    store.dispatch(addedTask())
+                onClick={()=> {//запрос на задачи который поставил пользователь
+                    let name = store.getState()["user"]
+                
+                    fetch(`/addedtask?name=${name}`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        store.dispatch(addedTask(data))
+                    })
+
+                    
                 }}>Поставленные задачи</button>
             </li>
 
             <li>
                 <button
-                onClick={()=> {
+                onClick={()=> {//остановился тут
                     store.dispatch(addTask())
                 }}>Поставить задачу</button>
             </li>

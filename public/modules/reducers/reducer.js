@@ -77,6 +77,7 @@ switch (action.type) {
         }    
     case "MY__TASK":
     return {...state,
+        dataMyTask:action.dataMyTask,
         added: action.added,
         allTask: action.allTask,
         myTask: action.myTask ,
@@ -92,12 +93,14 @@ switch (action.type) {
     case "ALL__TASK":
     return {...state,
         added: action.added,
+        dataAllMyTask: action.dataAllMyTask,
         allTask: action.allTask,
         myTask: action.myTask ,
         addTask: action.addTask ,
     }
     case "ADDED__TASK":
     return {...state,
+        addedTask: action.addedTask,
         added: action.added,
         allTask: action.allTask,
         myTask: action.myTask ,

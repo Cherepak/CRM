@@ -1,6 +1,7 @@
-export function myTask () {
+export function myTask (data) {
     return {
         type: "MY__TASK",
+        dataMyTask: data,
         added:false,
         allTask:false,
         myTask: true,
@@ -18,9 +19,10 @@ export function addTask () {
     }
 }
 
-export function allTask () {
+export function allTask (data) {
     return {
         type: "ALL__TASK",
+        dataAllMyTask: data,
         added:false,
         allTask:true,
         myTask: false,
@@ -29,9 +31,10 @@ export function allTask () {
 }
 
 
-export function addedTask () {
+export function addedTask (data) {
     return {
         type: "ADDED__TASK",
+        addedTask: data,
         added:true,
         allTask:false,
         myTask: false,

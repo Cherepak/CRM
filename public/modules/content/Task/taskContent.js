@@ -2,85 +2,94 @@ import React from "react";
 import {store} from "../../../app";
 
 export function TaskContent() {
-    return <div></div>
-    // if(store.getState().myTask) {
-    //      let result = [];
 
-    //     for(let key in listMyTask) {
-    //         if(!listMyTask[key]["status"]) {
-    //             result.push(
-    //                 <li key={key}>
-    //                     <h2>Тема: {listMyTask[key]["title"]}</h2>
-    //                     <p>Задача: {listMyTask[key]["text"]}</p>
-    //                     <p>Начало: {listMyTask[key]["dateStart"].toLocaleDateString()}.</p>
-    //                     <p>Окончание: {listMyTask[key]["dateFinish"].toLocaleDateString()}</p>
-    //                     {listMyTask[key]["status"] ? "Выполнено":"Не выполнено"}
-    //                 </li>);
-    //         } 
-    //     }
+    if(store.getState()["allTask"]) {//Показать все мои задачи
+        let data = store.getState()["dataAllMyTask"];
+
+        let result = []; 
+
+        for( let key in data ) {
+            result.push(
+                <li key={`${data[key]["id"]}`}>
+                    <h2>{data[key]["Тема"]}</h2>
+
+                    <p>{data[key]["Задача"]}</p>
+
+                    <p>{data[key]["Поставил"]}</p>
+
+                    <p>Статус: {data[key]["Статус"] == "true"  ?"Выполнено" : "Не выполнено" }</p>
+
+                    <p>Начало: {data[key]["Начало"]}</p>
+
+                    <p>Окончание: {data[key]["Окончание"]}</p>
+                </li>
+            )
+        }
+        return <div>
+            <h1>Все Ваши задачи</h1>
+            <ul>{result}</ul>
+        </div>
+
+    } else if (store.getState()["myTask"]) {//показать только текущие задачи
         
-    //     return <ul>{result}</ul>
-    // } else if (store.getState().added) {
-    //     return <div></div>
-    // } 
-    // else if(store.getState().allTask) {
-    //     let result = [];
+        let data = store.getState()["dataMyTask"];
 
-    //     for(let key in listMyTask) {
-    //         result.push(
-    //         <li key={key}>
-    //             <h2>Тема: {listMyTask[key]["title"]}</h2>
-    //             <p>Задача: {listMyTask[key]["text"]}</p>
-    //             <p>Начало: {listMyTask[key]["dateStart"].toLocaleDateString()}.</p>
-    //             <p>Окончание: {listMyTask[key]["dateFinish"].toLocaleDateString()}</p>
-    //             {listMyTask[key]["status"] ? "Выполнено":"Не выполнено"}
-    //         </li>);
-    //     }
+        let result = []; 
+
+        for( let key in data ) {
+            result.push(
+                <li key={`${data[key]["id"]}`}>
+                    <h2>{data[key]["Тема"]}</h2>
+
+                    <p>{data[key]["Задача"]}</p>
+
+                    <p>{data[key]["Поставил"]}</p>
+
+                    <p>Статус: {data[key]["Статус"] == "true" ? "Выполнено" : "Не выполнено" }</p>
+
+                    <p>Начало: {data[key]["Начало"]}</p>
+
+                    <p>Окончание: {data[key]["Окончание"]}</p>
+                </li>
+            )
+        }
+        return <div>
+            <h1>Все Ваши текущие задачи</h1>
+            <ul>{result}</ul>
+        </div>
+    } else if (store.getState()["added"]) {//показать только текущие задачи
         
-    //     return <ul>{result}</ul>
-    // }
-    // else if(store.getState().addTask) {
-        
-    //     function ListEmployee () {
-    //         let result = [];
-    //         for (let key in listEmployee) {
-    //             result.push(<option key={key} >{listEmployee[key]["name"]}</option>)
-    //         }
-    //         return <select id="employee">{result}</select>
-    //        }
+        let data = store.getState()["addedTask"];
 
-    //     return <div>
-    //         <form>
-    //             <div className="margin-bottom">
-    //                 <label className="dispaly-block">Тема</label>
-    //                 <input type="text" name="titleTask" id="titleTask" placeholder="Тема"/>
-    //             </div>
+        let result = []; 
 
-    //             <div className="margin-bottom">
-    //                 <label className="dispaly-block">Задача</label>
-    //                 <input type="" name="textTask" id="textTask" placeholder="Задача"/> 
-    //             </div>
+        for( let key in data ) {
+            result.push(
+                <li key={`${data[key]["id"]}`}>
+                    <h2>{data[key]["Тема"]}</h2>
 
-    //             <div className="margin-bottom">
-    //                 <label className="dispaly-block">Дата окончания</label>
-    //                 <input type="date" name="date" id="dateTask"/>
-    //             </div>
+                    <p>{data[key]["Задача"]}</p>
 
-    //             <div className="margin-bottom">
-    //                 <label>Для кого задача</label>
-    //                 <ListEmployee/>
-    //             </div>
+                    <p>{data[key]["Кому"]}</p>
 
-    //             <button>Отправить</button>
-    //         </form>
-    //     </div>
-    // }
-    // else {
+                    <p>Статус: {data[key]["Статус"] == "true" ? "Выполнено" : "Не выполнено" }</p>
 
-       
+                    <p>Начало: {data[key]["Начало"]}</p>
 
-    //     return <div>
-            
-    //     </div>
-    // }
+                    <p>Окончание: {data[key]["Окончание"]}</p>
+                </li>
+            )
+        }
+        return <div>
+            <h1>Все Ваши текущие задачи</h1>
+            <ul>{result}</ul>
+        </div>
+    }
+    
+    else {
+        return <div></div>
+    }
+    
+
+    
 }

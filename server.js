@@ -44,4 +44,43 @@ app.get("/addrpofile", (req,res) => {// необходимо добавить п
     })
 })
 
+app.get("/allmytask", (req,res)=> {
+    let name = req.query.name;
+
+    connection.query(`SELECT * FROM задачи WHERE кому = "${name}"`, (err, result) => {
+        if(err) {
+            console.log("Ошибка " + err)
+            
+        } else {
+            res.send(result)
+        }
+    })
+})
+
+app.get("/mytask", (req,res)=> {
+    let name = req.query.name;
+
+    connection.query(`SELECT * FROM задачи WHERE кому = "${name}" AND статус = "false"`, (err, result) => {
+        if(err) {
+            console.log("Ошибка " + err)
+            
+        } else {
+            res.send(result)
+        }
+    })
+})
+
+app.get("/addedtask", (req,res)=> {
+    let name = req.query.name;
+
+    connection.query(`SELECT * FROM задачи WHERE Поставил = "${name}"`, (err, result) => {
+        if(err) {
+            console.log("Ошибка " + err)
+            
+        } else {
+            res.send(result)
+        }
+    })
+})
+
 app.listen(3000);

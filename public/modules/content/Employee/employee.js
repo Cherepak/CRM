@@ -268,9 +268,12 @@ export function  Employee () {
 
                         <p>{listEmployee[key]["ФИО"]}</p>
 
+                        <p>{listEmployee[key]["Отдел"]}</p>
+                        
                         <p>{listEmployee[key]["Почта"]}</p>
                     
                         <p>{listEmployee[key]["Номер"]}</p>
+
                     </div>
                 </div>
 
