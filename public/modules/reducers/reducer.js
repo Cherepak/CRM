@@ -85,6 +85,7 @@ switch (action.type) {
     }
     case "ADD__TASK":
     return {...state,
+        listAmployee: action.listAmployee,
         added: action.added,
         allTask: action.allTask,
         myTask: action.myTask ,

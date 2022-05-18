@@ -83,4 +83,27 @@ app.get("/addedtask", (req,res)=> {
     })
 })
 
+app.get("/addtask", (req,res) => {//Добавить задачу
+
+    let to = req.query.to;
+    let task = req.query.task;
+    let dateFinishExpandedString = req.query.date;
+    let dateFinishExpanded = new Date(dateFinishExpandedString);
+    let dateFinish = `${dateFinishExpanded.getFullYear()}-${dateFinishExpanded.getMonth()}-${dateFinishExpanded.getDay()} ${dateFinishExpanded.getHours()}:${dateFinishExpanded.getMinutes()}:${dateFinishExpanded.getSeconds()}`;
+    let dateBeginExpanded = new Date();
+    let dateBegin =  `${dateBeginExpanded.getFullYear()}-${dateBeginExpanded.getMonth()}-${dateBeginExpanded.getDay()} ${dateBeginExpanded.getHours()}:${dateBeginExpanded.getMinutes()}:${dateBeginExpanded.getSeconds()}`;
+    let subject = req.query.subject;
+    let from = req.query.from;
+    let status = false;
+    connection.query(`INSERT задачи (Поставил, Кому, Тема, Начало, Окончание, Задача, Статус) 
+    VALUES ("${from}", "${to}", "${subject}", "${dateBegin}", "${dateFinish}", "${task}", "${status}")`, (err, result) => {
+        if(err) {
+            console.log(err)
+            res.send({answer: false})
+        } else {
+            res.send({answer: true})
+        }
+    })
+})
+
 app.listen(3000);

@@ -57,7 +57,16 @@ export function Task () {
             <li>
                 <button
                 onClick={()=> {//остановился тут
-                    store.dispatch(addTask())
+                    
+                fetch("/listEmployee")//разобраться как из промиса выгрузить во внешнюю функцию данные
+                .then(response => {
+                    return response.json()
+                })
+                .then(data => {
+                    store.dispatch(addTask(data))
+                })
+
+                    
                 }}>Поставить задачу</button>
             </li>
         </ul>

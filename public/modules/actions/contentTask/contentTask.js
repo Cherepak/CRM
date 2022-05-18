@@ -9,8 +9,9 @@ export function myTask (data) {
     }
 }
 
-export function addTask () {
+export function addTask (data) {
     return {
+        listAmployee: data,
         type: "ADD__TASK",
         added:false,
         allTask:false,
