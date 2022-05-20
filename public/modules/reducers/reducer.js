@@ -9,9 +9,11 @@ switch (action.type) {
             TableWork  : action.TableWork ,
             Employee  : action.Employee ,
             Task : action.Task ,
+            Reports: action.Reports,
             Sklad  : action.Sklad ,
             Clientele : action.Clientele ,
             Massage : action.Massage ,
+            Contract: action.Contract,
             Setting : action.Setting ,
         }
     case "CHOICE__CLIENTLE":
@@ -19,9 +21,11 @@ switch (action.type) {
             TableWork  : action.TableWork ,
             Employee  : action.Employee ,
             Task : action.Task ,
+            Reports: action.Reports,
             Sklad  : action.Sklad ,
             Clientele : action.Clientele ,
             Massage : action.Massage ,
+            Contract: action.Contract,
             Setting : action.Setting ,
         }
     case "CHOICE__EMPLOYEE":
@@ -30,9 +34,11 @@ switch (action.type) {
             TableWork  : action.TableWork ,
             Employee  : action.Employee ,
             Task : action.Task ,
+            Reports: action.Reports,
             Sklad  : action.Sklad ,
             Clientele : action.Clientele ,
             Massage : action.Massage ,
+            Contract: action.Contract,
             Setting : action.Setting ,
         }
     case "CHOICE__MASSAGE":
@@ -40,9 +46,11 @@ switch (action.type) {
             TableWork  : action.TableWork ,
             Employee  : action.Employee ,
             Task : action.Task ,
+            Reports: action.Reports,
             Sklad  : action.Sklad ,
             Clientele : action.Clientele ,
             Massage : action.Massage ,
+            Contract: action.Contract,
             Setting : action.Setting ,
         }
     case "CHOICE__SETTING":
@@ -50,9 +58,11 @@ switch (action.type) {
             TableWork  : action.TableWork ,
             Employee  : action.Employee ,
             Task : action.Task ,
+            Reports: action.Reports,
             Sklad  : action.Sklad ,
             Clientele : action.Clientele ,
             Massage : action.Massage ,
+            Contract: action.Contract,
             Setting : action.Setting ,
         }  
     case "CHOICE__SKLAD":
@@ -60,9 +70,11 @@ switch (action.type) {
             TableWork  : action.TableWork ,
             Employee  : action.Employee ,
             Task : action.Task ,
+            Reports: action.Reports,
             Sklad  : action.Sklad ,
             Clientele : action.Clientele ,
             Massage : action.Massage ,
+            Contract: action.Contract,
             Setting : action.Setting ,
         }  
     case "CHOICE__TASK":
@@ -70,11 +82,25 @@ switch (action.type) {
             TableWork  : action.TableWork ,
             Employee  : action.Employee ,
             Task : action.Task ,
+            Reports: action.Reports,
             Sklad  : action.Sklad ,
             Clientele : action.Clientele ,
             Massage : action.Massage ,
+            Contract: action.Contract,
             Setting : action.Setting ,
         }    
+    case "REPORTS":
+        return {...state,
+            TableWork: action.TableWork,
+            Employee: action.Employee,
+            Task: action.Task,
+            Reports: action.Reports,
+            Sklad: action.Sklad,
+            Clientele: action.Clientele,
+            Massage: action.Massage,
+            Contract: action.Contract,
+            Setting: action.Setting,
+        }
     case "MY__TASK":
     return {...state,
         dataMyTask:action.dataMyTask,
@@ -82,6 +108,7 @@ switch (action.type) {
         allTask: action.allTask,
         myTask: action.myTask ,
         addTask: action.addTask ,
+        report: action.report
     }
     case "ADD__TASK":
     return {...state,
@@ -90,14 +117,16 @@ switch (action.type) {
         allTask: action.allTask,
         myTask: action.myTask ,
         addTask: action.addTask ,
+        report: action.report
     }
     case "ALL__TASK":
     return {...state,
         added: action.added,
-        dataAllMyTask: action.dataAllMyTask,
+        dataMyTask: action.dataMyTask,
         allTask: action.allTask,
         myTask: action.myTask ,
         addTask: action.addTask ,
+        report: action.report
     }
     case "ADDED__TASK":
     return {...state,
@@ -106,7 +135,17 @@ switch (action.type) {
         allTask: action.allTask,
         myTask: action.myTask ,
         addTask: action.addTask ,
+        report: action.report
     }
+    case "REPORT":
+        return {...state,
+            added: action.added,
+            allTask: action.allTask,
+            myTask: action.myTask ,
+            addTask: action.addTask ,
+            report: action.report,
+            reportId: action.reportId,
+        }
     case "OPEN__PROFILE":
         return {...state,
             addEmployee: action.addEmployee,
@@ -145,6 +184,7 @@ switch (action.type) {
             profile: action.profile,
             profileRedact: action.profileRedact,
         }  
+        
         case "UPDATE":
         return {
             ...state,

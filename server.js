@@ -106,4 +106,19 @@ app.get("/addtask", (req,res) => {//Добавить задачу
     })
 })
 
+app.get("/changestatustask", (req,res) => {
+    let id = req.query.id;
+    let comment = req.query.comment;
+    connection.query(`UPDATE задачи SET Статус = "true", Комментарий = "${comment}" WHERE id = "${id}"`,(err,result) => {
+        if(err) {
+            console.log(err)
+            res.send({answer: false})
+        } else {
+            res.send({answer: true})
+        }
+    });
+    
+
+})
+
 app.listen(3000);

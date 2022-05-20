@@ -7,6 +7,8 @@ import {actionMassage} from "./actions/contentWrapperActions/actionsForContentCo
 import {actionSetting} from "./actions/contentWrapperActions/actionsForContentContainer"
 import {actionSklad} from "./actions/contentWrapperActions/actionsForContentContainer"
 import {actionTask} from "./actions/contentWrapperActions/actionsForContentContainer"
+import {actionReports} from "./actions/contentWrapperActions/actionsForContentContainer"
+import {actionContract} from "./actions/contentWrapperActions/actionsForContentContainer"
 import {store} from "../app.js"
 
 
@@ -54,6 +56,12 @@ export function IntarfaceForWork (props) {
           <li className="margin-right">
             <button className="button"
             onClick={()=>{
+              store.dispatch(actionReports())
+            }}>Отчеты</button>
+          </li>
+          <li className="margin-right">
+            <button className="button"
+            onClick={()=>{
               store.dispatch(actionClientle())
             }}>Клиенты</button>
           </li>
@@ -68,6 +76,12 @@ export function IntarfaceForWork (props) {
             onClick={()=>{
               store.dispatch(actionSklad())
             }}>Склад</button>
+          </li>
+          <li className="margin-right">
+            <button className="button"
+            onClick={()=>{
+              store.dispatch(actionContract())
+            }}>Сделки</button>
           </li>
           <li>
             <button className="button"

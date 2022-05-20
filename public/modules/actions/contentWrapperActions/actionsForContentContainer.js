@@ -6,9 +6,11 @@ export function actionTableWork () {
         TableWork  : true,
         Employee  : false,
         Task : false,
+        Reports: false,
         Sklad  : false,
         Clientele : false,
         Massage : false,
+        Contract: false,
         Setting : false,
     }
 }
@@ -20,9 +22,11 @@ export function actionClientle () {
         TableWork  : false,
         Employee  : false,
         Task : false,
+        Reports: false,
         Sklad  : false,
         Clientele : true,
         Massage : false,
+        Contract: false,
         Setting : false,
     }
 }
@@ -35,9 +39,11 @@ export function actionEmployee (data) {
         TableWork  : false,
         Employee  : true,
         Task : false,
+        Reports: false,
         Sklad  : false,
         Clientele : false,
         Massage : false,
+        Contract: false,
         Setting : false,
     }
 }
@@ -49,9 +55,11 @@ export function actionMassage () {
         TableWork  : false,
         Employee  : false,
         Task : false,
+        Reports: false,
         Sklad  : false,
         Clientele : false,
         Massage : true,
+        Contract: false,
         Setting : false,
     }
 }
@@ -63,9 +71,11 @@ export function actionSetting () {
         TableWork  : false,
         Employee  : false,
         Task : false,
+        Reports: false,
         Sklad  : false,
         Clientele : false,
         Massage : false,
+        Contract: false,
         Setting : true,
     }
 }
@@ -76,9 +86,11 @@ export function actionSklad () {
         TableWork  : false,
         Employee  : false,
         Task : false,
+        Reports: false,
         Sklad  : true,
         Clientele : false,
         Massage : false,
+        Contract: false,
         Setting : false,
     }
 }
@@ -89,9 +101,41 @@ export function actionTask () {
         TableWork  : false,
         Employee  : false,
         Task : true,
+        Reports: false,
         Sklad  : false,
         Clientele : false,
         Massage : false,
+        Contract: false,
         Setting : false,
+    }
+}
+
+export function actionReports() {
+    return {
+        type: "REPORTS",
+        TableWork: false,
+        Employee: false,
+        Task: false,
+        Reports: true,
+        Sklad: false,
+        Clientele: false,
+        Massage: false,
+        Contract: false,
+        Setting: false,
+    }
+}
+
+export function actionContract () {
+    return {
+        type: "REPORTS",
+        TableWork: false,
+        Employee: false,
+        Task: false,
+        Reports: false,
+        Sklad: false,
+        Clientele: false,
+        Massage: false,
+        Contract: true,
+        Setting: false,
     }
 }

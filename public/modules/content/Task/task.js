@@ -58,7 +58,7 @@ export function Task () {
                 <button
                 onClick={()=> {//остановился тут
                     
-                fetch("/listEmployee")//разобраться как из промиса выгрузить во внешнюю функцию данные
+                fetch("/listEmployee")
                 .then(response => {
                     return response.json()
                 })

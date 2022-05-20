@@ -1,17 +1,18 @@
 import React from "react";
+import {report,allTask,addedTask,myTask} from "../../actions/contentTask/contentTask"
 import {store} from "../../../app";
 
 export function TaskContent() {
 
     if(store.getState()["allTask"]) {//Показать все мои задачи
-        let data = store.getState()["dataAllMyTask"];
+        let data = store.getState()["dataMyTask"];
 
         let result = []; 
 
         for( let key in data ) {
             
             result.push(
-                <li key={`${data[key]["id"]}`}>
+                <li className="taskCard" key={`${data[key]["id"]}` } style={data[key]["Статус"] == "true" ? {"backgroundColor": "rgb(17 249 8 / 38%)", }: {"backgroundColor": "rgb(249 8 8 / 38%)"}}>
                     <h2>{data[key]["Тема"]}</h2>
 
                     <p>{data[key]["Задача"]}</p>
@@ -24,14 +25,17 @@ export function TaskContent() {
 
                     <p>Окончание: {data[key]["Окончание"]}</p>
 
-                    <button onClick={()=> {
-
-                    }}>Отметить выполнение</button>
+                    {data[key]["Статус"] == "false" ? 
+                   <button data-elem={`${data[key]["id"]}`} onClick={(elem)=> {
+                    let id = elem.target.getAttribute("data-elem")
+                    store.dispatch(report(id))
+                    }}>Составить отчет
+                    </button> : <button>Посмотреть отчет</button>}
                 </li>
             )
         }
         return <div>
-            <h1>Все Ваши задачи</h1>
+            <h1>Все мои задачи</h1>
             <ul>{result}</ul>
         </div>
 
@@ -43,7 +47,7 @@ export function TaskContent() {
 
         for( let key in data ) {
             result.push(
-                <li key={`${data[key]["id"]}`}>
+                <li className="taskCard" key={`${data[key]["id"]}` } style={data[key]["Статус"] == "true" ? {"backgroundColor": "rgb(17 249 8 / 38%)", }: {"backgroundColor": "rgb(249 8 8 / 38%)"}}>
                     <h2>{data[key]["Тема"]}</h2>
 
                     <p>{data[key]["Задача"]}</p>
@@ -55,11 +59,19 @@ export function TaskContent() {
                     <p>Начало: {data[key]["Начало"]}</p>
 
                     <p>Окончание: {data[key]["Окончание"]}</p>
+
+                    {data[key]["Статус"] == "false" ? 
+                    <button data-elem={`${data[key]["id"]}`} onClick={(elem)=> {
+                        let id = elem.target.getAttribute("data-elem")
+                        
+                        store.dispatch(report(id))
+                    }}>Составить отчет
+                    </button> : <button>Посмотреть отчет</button>}
                 </li>
             )
         }
         return <div>
-            <h1>Все Ваши текущие задачи</h1>
+            <h1>Все мои текущие задачи</h1>
             <ul>{result}</ul>
         </div>
     } else if (store.getState()["added"]) {//показать только текущие задачи
@@ -70,7 +82,7 @@ export function TaskContent() {
 
         for( let key in data ) {
             result.push(
-                <li key={`${data[key]["id"]}`}>
+                <li className="taskCard" key={`${data[key]["id"]}` } style={data[key]["Статус"] == "true" ? {"backgroundColor": "rgb(17 249 8 / 38%)", }: {"backgroundColor": "rgb(249 8 8 / 38%)"}}>
                     <h2>{data[key]["Тема"]}</h2>
 
                     <p>{data[key]["Задача"]}</p>
@@ -86,7 +98,7 @@ export function TaskContent() {
             )
         }
         return <div>
-            <h1>Все Ваши текущие задачи</h1>
+            <h1>Все задачи от меня</h1>
             <ul>{result}</ul>
         </div>
     } else if (store.getState()["addTask"]) {//Добавить задачу
@@ -133,7 +145,6 @@ export function TaskContent() {
                     return response.json()
                 })
                 .then(data => {
-                    console.log(data)
                     if(data["answer"]) {
                         alert("Данные отправлены и записаны");
                     } else {
@@ -142,6 +153,56 @@ export function TaskContent() {
                 })
             }}>Добавить</button>
         </div>
+    } else if (store.getState()['report']) {//Составление отчета
+
+        let data = store.getState()["dataMyTask"];
+        let result = []; 
+
+        for( let key in data ) {
+            if(data[key]["id"] == store.getState()["reportId"]) {
+                result.push(
+                    <li className="taskCard" key={`${data[key]["id"]}` } style={data[key]["Статус"] == "true" ? {"backgroundColor": "rgb(17 249 8 / 38%)", }: {"backgroundColor": "rgb(249 8 8 / 38%)"}}>
+                        <h2>{data[key]["Тема"]}</h2>
+    
+                        <p>{data[key]["Задача"]}</p>
+    
+                        <p>{data[key]["Поставил"]}</p>
+    
+                        <p>Статус: {data[key]["Статус"] == "true" ? "Выполнено" : "Не выполнено" }</p>
+    
+                        <p>Начало: {data[key]["Начало"]}</p>
+    
+                        <p>Окончание: {data[key]["Окончание"]}</p>
+    
+                        <div>
+                            <label>Комментарий</label>
+                            <textarea id="comment" placeholder="Комментарий к задаче"></textarea>
+                        </div>
+    
+                        <button data-elem={`${data[key]["id"]}`} onClick={(elem)=> {
+                             let id = elem.target.getAttribute("data-elem");
+                             let comment = document.getElementById("comment").value;
+                             fetch(`/changestatustask?id=${id}&comment=${comment}`)
+                             .then(response => {
+                                 return response.json();
+                             })
+                             .then(data => {
+                                 if(data["answer"]) {
+                                     alert("Статус задачи изменен")
+                                 } else {
+                                     alert("Возникла ошибка")
+                                 }
+                             })
+                        }}>Отправить отчет</button>
+                    </li>
+                ) 
+                } 
+        }
+        return <div>
+               <h1>Составление отчета</h1>
+            <ul>{result}</ul>
+        </div>
+
     }
     
     else {

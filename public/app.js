@@ -10,19 +10,22 @@ export const initialState = {
   
   user: "Антонов Антон Антонович",
   status: "admin",
-  TableWork  : false,
+  TableWork  : true,
   Employee  : false,
     addEmployee:false,
     profile: false,
     profileRedact: false,
-  Task : true,
+  Task : false,
     allTask:false,
     myTask: false,
     addTask: false,
     added:false,
+    report: false,
+  Reports: false,
   Sklad  : false,
   Clientele : false,
   Massage : false,
+  Contract: false,
   Setting : false,
     
 }
@@ -51,9 +54,12 @@ const mapStateToProps = (state) => {
         myTask: state.myTask,
         addTask: state.addTask,
         added: state.added,
+        report: state.report,
+      Reports: state.Reports,
       Sklad  : state.Sklad,
       Clientele : state.Clientele,
       Massage : state.Massage,
+      Contract: state.Conrtact,
       Setting : state.Setting,
     }
 }
