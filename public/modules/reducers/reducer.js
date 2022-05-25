@@ -107,15 +107,27 @@ switch (action.type) {
         added: action.added,
         allTask: action.allTask,
         myTask: action.myTask ,
+        doneTask: action.doneTask,
         addTask: action.addTask ,
         report: action.report
     }
+    case "DONE__TASK":
+        return {...state,
+            dataMyTask:action.dataMyTask,
+            added: action.added,
+            allTask: action.allTask,
+            myTask: action.myTask ,
+            doneTask: action.doneTask,
+            addTask: action.addTask ,
+            report: action.report
+        }
     case "ADD__TASK":
     return {...state,
         listAmployee: action.listAmployee,
         added: action.added,
         allTask: action.allTask,
         myTask: action.myTask ,
+        doneTask: action.doneTask,
         addTask: action.addTask ,
         report: action.report
     }
@@ -125,6 +137,7 @@ switch (action.type) {
         dataMyTask: action.dataMyTask,
         allTask: action.allTask,
         myTask: action.myTask ,
+        doneTask: action.doneTask,
         addTask: action.addTask ,
         report: action.report
     }
@@ -134,6 +147,7 @@ switch (action.type) {
         added: action.added,
         allTask: action.allTask,
         myTask: action.myTask ,
+        doneTask: action.doneTask,
         addTask: action.addTask ,
         report: action.report
     }
@@ -142,6 +156,7 @@ switch (action.type) {
             added: action.added,
             allTask: action.allTask,
             myTask: action.myTask ,
+            doneTask: action.doneTask,
             addTask: action.addTask ,
             report: action.report,
             reportId: action.reportId,
@@ -189,6 +204,43 @@ switch (action.type) {
         return {
             ...state,
             time: action.time
+        }
+        case "ORGANIZATION":
+        return {
+            ...state,
+            organization: action.organization ,
+            organizationData: action.organizationData,
+            addCliente:action.addCliente,
+            cliente: action.cliente,
+        }
+        case "CLIENTE":
+        return {
+            ...state,
+            organization: action.organization ,
+            cliente: action.cliente,
+            addCliente: action.addCliente,
+            clienteData: action.clienteData
+        }
+        case "ADD__CLIENTE":
+        return {
+            ...state,
+            organization: action.organization ,
+            cliente: action.cliente,
+            addCliente: action.addCliente,
+            organizationFace:action.organizationFace,
+            fizFace: action.fizFace
+        }
+        case "ORGANIZATION__FACE":
+        return {
+            ...state,
+            organizationFace:action.organizationFace,
+            fizFace: action.fizFace
+        }
+        case "FIZ__FACE":
+        return {
+            ...state,
+            organizationFace:action.organizationFace,
+            fizFace: action.fizFace
         }
         
 }

@@ -70,6 +70,21 @@ app.get("/mytask", (req,res)=> {
     })
 })
 
+
+app.get("/donetask", (req,res)=> {
+    let name = req.query.name;
+
+    connection.query(`SELECT * FROM задачи WHERE кому = "${name}" AND статус = "true"`, (err, result) => {
+        if(err) {
+            console.log("Ошибка " + err)
+            
+        } else {
+            res.send(result)
+        }
+    })
+})
+
+
 app.get("/addedtask", (req,res)=> {
     let name = req.query.name;
 
@@ -119,6 +134,26 @@ app.get("/changestatustask", (req,res) => {
     });
     
 
+})
+
+app.get("/organization", (req,res) => {
+    connection.query(`SELECT * FROM организации`, (err, result) => {
+        if(err) {
+            console.log("Возникла ошибка" + err)
+        } else {
+            res.send(result)
+        }
+    })
+})
+
+app.get("/client",(req,res) => {
+    connection.query(`SELECT * FROM клиенты`, (err, result) => {
+        if(err) {
+            console.log("Возникла ошибка" + err)
+        } else {
+            res.send(result)
+        }
+    })
 })
 
 app.listen(3000);

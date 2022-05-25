@@ -439,3 +439,7 @@ address {
 .taskCard {
   padding: 5px 10px;
 }
+
+.inputcliente {
+  width: 500px;
+}

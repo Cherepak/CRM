@@ -24,21 +24,6 @@ export function Task () {
 
             <li>
                 <button
-                onClick={()=> {// запрос на текущие задачи
-                    let name = store.getState()["user"]
-
-                    fetch(`/mytask?name=${name}`)
-                    .then(response => {
-                        return response.json()
-                    })
-                    .then(data => {
-                        store.dispatch(myTask(data))
-                    })
-                }}>Текущие задачи</button>
-            </li>
-
-            <li>
-                <button
                 onClick={()=> {//запрос на задачи который поставил пользователь
                     let name = store.getState()["user"]
                 
@@ -51,7 +36,7 @@ export function Task () {
                     })
 
                     
-                }}>Поставленные задачи</button>
+                }}>Созданы мной</button>
             </li>
 
             <li>

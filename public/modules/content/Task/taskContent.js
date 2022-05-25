@@ -1,80 +1,161 @@
 import React from "react";
-import {report,allTask,addedTask,myTask} from "../../actions/contentTask/contentTask"
+import {report,allTask,addedTask,myTask,doneTask} from "../../actions/contentTask/contentTask"
 import {store} from "../../../app";
 
 export function TaskContent() {
 
     if(store.getState()["allTask"]) {//Показать все мои задачи
-        let data = store.getState()["dataMyTask"];
+        function Tasks () {
+            if (store.getState()["myTask"]) {//показать только текущие задачи
+                
+                let data = store.getState()["dataMyTask"];
 
-        let result = []; 
+                let result = []; 
 
-        for( let key in data ) {
-            
-            result.push(
-                <li className="taskCard" key={`${data[key]["id"]}` } style={data[key]["Статус"] == "true" ? {"backgroundColor": "rgb(17 249 8 / 38%)", }: {"backgroundColor": "rgb(249 8 8 / 38%)"}}>
-                    <h2>{data[key]["Тема"]}</h2>
+                for( let key in data ) {
+                    result.push(
+                        <li className="taskCard" key={`${data[key]["id"]}` } style={data[key]["Статус"] == "true" ? {"backgroundColor": "rgb(17 249 8 / 38%)", }: {"backgroundColor": "rgb(249 8 8 / 38%)"}}>
+                            <h2>{data[key]["Тема"]}</h2>
 
-                    <p>{data[key]["Задача"]}</p>
+                            <p>{data[key]["Задача"]}</p>
 
-                    <p>{data[key]["Поставил"]}</p>
+                            <p>{data[key]["Поставил"]}</p>
 
-                    <p>Статус: {data[key]["Статус"] == "true"  ?"Выполнено" : "Не выполнено" }</p>
+                            <p>Статус: {data[key]["Статус"] == "true" ? "Выполнено" : "Не выполнено" }</p>
 
-                    <p>Начало: {data[key]["Начало"]}</p>
+                            <p>Начало: {data[key]["Начало"]}</p>
 
-                    <p>Окончание: {data[key]["Окончание"]}</p>
+                            <p>Окончание: {data[key]["Окончание"]}</p>
 
-                    {data[key]["Статус"] == "false" ? 
-                   <button data-elem={`${data[key]["id"]}`} onClick={(elem)=> {
-                    let id = elem.target.getAttribute("data-elem")
-                    store.dispatch(report(id))
-                    }}>Составить отчет
-                    </button> : <button>Посмотреть отчет</button>}
-                </li>
-            )
-        }
-        return <div>
-            <h1>Все мои задачи</h1>
-            <ul>{result}</ul>
-        </div>
+                            {data[key]["Статус"] == "false" ? 
+                            <button data-elem={`${data[key]["id"]}`} onClick={(elem)=> {
+                                let id = elem.target.getAttribute("data-elem")
+                                
+                                store.dispatch(report(id))
+                            }}>Составить отчет
+                            </button> : <button>Посмотреть отчет</button>}
+                        </li>
+                    )
+                }
+                return <ul>{result}</ul>
+            } 
+            else if (store.getState()["doneTask"]) {//показать только выполненные задачи
+                
+                let data = store.getState()["dataMyTask"];
 
-    } else if (store.getState()["myTask"]) {//показать только текущие задачи
+                let result = []; 
+
+                for( let key in data ) {
+                    result.push(
+                        <li className="taskCard" key={`${data[key]["id"]}` } style={data[key]["Статус"] == "true" ? {"backgroundColor": "rgb(17 249 8 / 38%)", }: {"backgroundColor": "rgb(249 8 8 / 38%)"}}>
+                            <h2>{data[key]["Тема"]}</h2>
+
+                            <p>{data[key]["Задача"]}</p>
+
+                            <p>{data[key]["Поставил"]}</p>
+
+                            <p>Статус: {data[key]["Статус"] == "true" ? "Выполнено" : "Не выполнено" }</p>
+
+                            <p>Начало: {data[key]["Начало"]}</p>
+
+                            <p>Окончание: {data[key]["Окончание"]}</p>
+
+                            {data[key]["Статус"] == "false" ? 
+                            <button data-elem={`${data[key]["id"]}`} onClick={(elem)=> {
+                                let id = elem.target.getAttribute("data-elem")
+                                
+                                store.dispatch(report(id))
+                            }}>Составить отчет
+                            </button> : <button>Посмотреть отчет</button>}
+                        </li>
+                    )
+                }
+                return <ul>{result}</ul>
+            }  else if (store.getState()["allTask"]) {
+
+                let data = store.getState()["dataMyTask"];
+
+                let result = []; 
         
-        let data = store.getState()["dataMyTask"];
-
-        let result = []; 
-
-        for( let key in data ) {
-            result.push(
-                <li className="taskCard" key={`${data[key]["id"]}` } style={data[key]["Статус"] == "true" ? {"backgroundColor": "rgb(17 249 8 / 38%)", }: {"backgroundColor": "rgb(249 8 8 / 38%)"}}>
-                    <h2>{data[key]["Тема"]}</h2>
-
-                    <p>{data[key]["Задача"]}</p>
-
-                    <p>{data[key]["Поставил"]}</p>
-
-                    <p>Статус: {data[key]["Статус"] == "true" ? "Выполнено" : "Не выполнено" }</p>
-
-                    <p>Начало: {data[key]["Начало"]}</p>
-
-                    <p>Окончание: {data[key]["Окончание"]}</p>
-
-                    {data[key]["Статус"] == "false" ? 
-                    <button data-elem={`${data[key]["id"]}`} onClick={(elem)=> {
-                        let id = elem.target.getAttribute("data-elem")
-                        
-                        store.dispatch(report(id))
-                    }}>Составить отчет
-                    </button> : <button>Посмотреть отчет</button>}
-                </li>
-            )
+                for( let key in data ) {
+                    
+                    result.push(
+                        <li className="taskCard" key={`${data[key]["id"]}` } style={data[key]["Статус"] == "true" ? {"backgroundColor": "rgb(17 249 8 / 38%)", }: {"backgroundColor": "rgb(249 8 8 / 38%)"}}>
+                            <h2>{data[key]["Тема"]}</h2>
+        
+                            <p>{data[key]["Задача"]}</p>
+        
+                            <p>{data[key]["Поставил"]}</p>
+        
+                            <p>Статус: {data[key]["Статус"] == "true"  ?"Выполнено" : "Не выполнено" }</p>
+        
+                            <p>Начало: {data[key]["Начало"]}</p>
+        
+                            <p>Окончание: {data[key]["Окончание"]}</p>
+        
+                            {data[key]["Статус"] == "false" ? 
+                           <button data-elem={`${data[key]["id"]}`} onClick={(elem)=> {
+                            let id = elem.target.getAttribute("data-elem")
+                            store.dispatch(report(id))
+                            }}>Составить отчет
+                            </button> : <button>Посмотреть отчет</button>}
+                        </li>
+                    )
+                }
+                return <ul>{result}</ul>
+            }
         }
+
         return <div>
-            <h1>Все мои текущие задачи</h1>
-            <ul>{result}</ul>
+            <h1>Мои задачи</h1>
+            <ul className="flex">
+                <li>
+                    <button
+                    onClick={()=> {// запрос на текущие задачи
+                        let name = store.getState()["user"]
+
+                        fetch(`/mytask?name=${name}`)
+                        .then(response => {
+                            return response.json()
+                        })
+                        .then(data => {
+                            store.dispatch(myTask(data))
+                        })
+                    }}>Текущие задачи</button>
+                </li>
+                <li>
+                    <button
+                    onClick={()=> {// запрос на выполненные задачи
+                        let name = store.getState()["user"]
+
+                        fetch(`/donetask?name=${name}`)
+                        .then(response => {
+                            return response.json()
+                        })
+                        .then(data => {
+                            store.dispatch(doneTask(data))
+                        })
+                    }}>Выполненные задачи</button>
+                </li>
+                <li>
+                    <button
+                    onClick={()=> {// запрос на выполненные задачи
+                        let name = store.getState()["user"]
+                
+                        fetch(`/allmytask?name=${name}`)
+                        .then(response => {
+                            return response.json()
+                        })
+                        .then(data => {
+                            store.dispatch(allTask(data))
+                        })
+                    }}>все задачи</button>
+                </li>
+            </ul>
+            <Tasks/>
         </div>
-    } else if (store.getState()["added"]) {//показать только текущие задачи
+
+    } else if (store.getState()["added"]) {//показать только созданные мной задачи
         
         let data = store.getState()["addedTask"];
 
@@ -92,13 +173,15 @@ export function TaskContent() {
                     <p>Статус: {data[key]["Статус"] == "true" ? "Выполнено" : "Не выполнено" }</p>
 
                     <p>Начало: {data[key]["Начало"]}</p>
+                    
+                    {data[key]["Статус"] == "false" ? "" : <button>Посмотреть отчет</button>}
 
                     <p>Окончание: {data[key]["Окончание"]}</p>
                 </li>
             )
         }
         return <div>
-            <h1>Все задачи от меня</h1>
+            <h1>Cозданные мной</h1>
             <ul>{result}</ul>
         </div>
     } else if (store.getState()["addTask"]) {//Добавить задачу
