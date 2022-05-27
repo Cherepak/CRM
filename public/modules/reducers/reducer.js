@@ -50,6 +50,7 @@ switch (action.type) {
             Sklad  : action.Sklad ,
             Clientele : action.Clientele ,
             Massage : action.Massage ,
+            listEmployee : action.listEmployee,
             Contract: action.Contract,
             Setting : action.Setting ,
         }
@@ -227,20 +228,68 @@ switch (action.type) {
             organization: action.organization ,
             cliente: action.cliente,
             addCliente: action.addCliente,
-            organizationFace:action.organizationFace,
-            fizFace: action.fizFace
         }
         case "ORGANIZATION__FACE":
         return {
             ...state,
             organizationFace:action.organizationFace,
-            fizFace: action.fizFace
+            fizFace: action.fizFace,
+            moreAboutOrganization: action.moreAboutOrganization,
+            moreAboutFizFace: action.moreAboutFizFace,
         }
         case "FIZ__FACE":
         return {
             ...state,
             organizationFace:action.organizationFace,
-            fizFace: action.fizFace
+            fizFace: action.fizFace,
+        }
+        case "MORE__ABOUT__ORGANIZATION":
+        return {
+            ...state,
+            redactOrganization: action.redactFizFace,
+            redactFizFace: action.redactFizFace,
+            moreAboutOrganization: action.moreAboutOrganization,
+            moreAboutOrganizationData: action.moreAboutOrganizationData,
+            moreAboutFizFace: action.moreAboutFizFace,
+            organization: action.organization ,
+            cliente: action.cliente
+        }
+        case "MORE__ABOUT__FIZ__FACE":
+        return {
+            ...state,
+            redactOrganization: action.redactFizFace,
+            redactFizFace: action.redactFizFace,
+            moreAboutOrganization: action.moreAboutOrganization,
+            moreAboutFizFace: action.moreAboutFizFace,
+            moreAboutFizFaceData: action.moreAboutFizFaceData,
+            organization: action.organization ,
+            cliente: action.cliente
+        }
+        case "REDACT__ORGANIZATION":
+        return {
+            ...state,
+            redactFizFace: action.redactFizFace,
+            redactOrganization: action.redactOrganization,
+            moreAboutOrganization: action.moreAboutOrganization,
+            moreAboutFizFace: action.moreAboutFizFace,
+            organization: action.organization ,
+            cliente: action.cliente
+        }
+        case "REDACT__FIZ_FACE":
+        return {
+            ...state,
+            redactFizFace: action.redactFizFace,
+            redactOrganization: action.redactOrganization,
+            moreAboutOrganization: action.moreAboutOrganization,
+            moreAboutFizFace: action.moreAboutFizFace,
+            organization: action.organization ,
+            cliente: action.cliente
+        }
+        case "MASSAGE__CONTENT":
+        return {
+            ...state,
+            dataMassage: action.dataMassage, 
+            massageContent: action.massageContent
         }
         
 }

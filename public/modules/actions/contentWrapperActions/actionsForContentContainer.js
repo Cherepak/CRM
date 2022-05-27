@@ -49,7 +49,8 @@ export function actionEmployee (data) {
 }
 
 
-export function actionMassage () {
+export function actionMassage (data) {
+
     return {
         type: "CHOICE__MASSAGE",
         TableWork  : false,
@@ -59,6 +60,7 @@ export function actionMassage () {
         Sklad  : false,
         Clientele : false,
         Massage : true,
+        listEmployee : data,
         Contract: false,
         Setting : false,
     }

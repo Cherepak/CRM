@@ -147,7 +147,7 @@ address {
 
 .leftBlock {
   border-right: 1px solid #0000001f;
-  width: 300px;
+  width: 350px;
 }
 
 
@@ -442,4 +442,19 @@ address {
 
 .inputcliente {
   width: 500px;
+}
+
+.massage {
+  width: 100%;
+  border: none;
+}
+
+.wrapperMassage {
+  width: 700px;
+  border: 1px solid #000;
+}
+
+.formMassage {
+  padding: 10px 5px;
+  border-top: 1px solid #000;
 }

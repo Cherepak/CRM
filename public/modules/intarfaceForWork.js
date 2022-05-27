@@ -68,7 +68,18 @@ export function IntarfaceForWork (props) {
           <li className="margin-right">
             <button className="button"
             onClick={()=>{
-              store.dispatch(actionMassage())
+              fetch("/listEmployee")
+              .then(result => {
+                    return result.json()
+                })
+                .then(data => {
+                
+                  store.dispatch(actionMassage(data))
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+              
             }}>Чат</button>
           </li>
           <li className="margin-right">
