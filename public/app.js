@@ -36,6 +36,8 @@ export const initialState = {
     redactOrganization: false,
   Massage : false,
     massageContent:false,
+    dataMassage: [],
+    to: [],
   Contract: false,
   Setting : false,
     
@@ -81,6 +83,8 @@ const mapStateToProps = (state) => {
         redactOrganization: state.redactOrganization,
       Massage : state.Massage,
         massageContent:state.massageContent,
+        dataMassage: state.dataMassage,
+        to: state.to,
       Contract: state.Conrtact,
       Setting : state.Setting,
     }

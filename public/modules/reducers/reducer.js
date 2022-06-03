@@ -289,7 +289,8 @@ switch (action.type) {
         return {
             ...state,
             dataMassage: action.dataMassage, 
-            massageContent: action.massageContent
+            massageContent: action.massageContent,
+            to: action.to
         }
         
 }

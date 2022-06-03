@@ -296,16 +296,46 @@ app.get("/loadmassage", (req,res)=> {
     let from = req.query.from;
     let to = req.query.to;
 
-    connection.query(`SELECT сообщение, от FROM сообщения WHERE от="${from}" AND кому="${to}"`, (err, result) => {
+    let arr = [];
+
+    connection.query(`SELECT * FROM сообщения WHERE от="${from}" AND кому="${to}"`, (err, result) => {
+        arr.push(result);
+
         if(err) {
-            res.send({response: false, data: result})
             console.log(err)
         } else {
-            res.send({response: true, data: result})
-            console.log(result)
+            connection.query(`SELECT * FROM сообщения WHERE от="${to}" AND кому="${from}"`, (err, result) => {
+                arr.push(result)
+                
+                if(err) {
+                    res.send({response: false, data: arr})
+                    console.log(err)
+                } 
+                else {
+                    res.send({response: true, data: arr})
+                }
+                })
         }
+        
     })
+
 })
 
+
+app.get(`/downloadmassage`, (req, res) => {
+
+    let to = req.query.to ;
+    let from = req.query.from ;
+    let massage = req.query.massage ;
+    let date = new Date();
+    date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    
+    connection.query(`INSERT сообщения (от, кому, сообщение, время) 
+    VALUES ("${from}", "${to}", "${massage}", "${date}")`, (err, result) => {
+        if(err) {
+            console.log(err)
+        } 
+    });
+})
 
 app.listen(3000);

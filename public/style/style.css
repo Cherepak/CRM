@@ -458,3 +458,15 @@ address {
   padding: 10px 5px;
   border-top: 1px solid #000;
 }
+
+.from {
+  background-color: rgb(207, 142, 142);
+}
+
+.to {
+  background-color: rgb(236, 4, 4);
+}
+
+.nameUserInMassage {
+  color: #5182ed;
+}
